@@ -57,6 +57,19 @@ const Sidebar = () => {
             </NavLink>
           </div>
 
+          <div
+            className={`mb-2 cursor-pointer py-2 pl-3 pr-6 rounded-md ${
+              location.pathname === "/allblogpost"
+                ? "bg-blue-500"
+                : "hover:bg-blue-500"
+            } transition-colors duration-300 flex items-center`}
+          >
+            <NavLink to="/allblogpost">
+              <i className="fa-solid fa-layer-group"></i>
+              <span className="ml-3">Blog Post</span>
+            </NavLink>
+          </div>
+
           <div className="mb-2 cursor-pointer py-2 pl-3 pr-6 rounded-md hover:bg-blue-500 border-2 border-blue-500 transition-colors duration-300 flex items-center">
             <button type="button" onClick={handleLogoutClick}>
               <i className="fa-solid fa-arrow-right-from-bracket"></i>

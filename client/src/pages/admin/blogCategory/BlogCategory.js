@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
@@ -7,10 +6,8 @@ import PORT from "../../../assets/constant/Url";
 import DeleteModal from "../layout/DeleteModal";
 
 const BlogCategory = () => {
-  const navigate = useNavigate();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedBlogId, setSelectedBlogId] = useState(null);
-  const [isEditMode, setIsEditMode] = useState(false);
 
   // fields of table
   const [categoryName, setCategoryName] = useState("");
@@ -69,6 +66,9 @@ const BlogCategory = () => {
         .then((res) => {
           toast.success("Category Added Successfully");
           getData();
+          setCategoryName("");
+          setCategoryDesc("");
+          setSubCategory(null);
         })
         .catch((e) => {
           toast.error("Category Failed");
@@ -219,92 +219,89 @@ const BlogCategory = () => {
           </div>
         </div>
 
-        {/* ADD BRAND FORM */}
-        {!isEditMode && (
-          <div className="w-5/12 absolute top-8 right-0 mt-4 flex justify-center items-center">
-            <div className="w-9/12 shadow-lg text-gray-500 px-3 py-2">
-              <form method="post" onSubmit={savedata}>
-                <p className="font-bold text-xl text-gray-700 mb-3">
-                  ADD BLOG CATEGORY
-                </p>
-                <div className="grid gap-4 mb-6">
-                  <div>
-                    <label
-                      htmlFor="category_name"
-                      className="block mb-2 text-sm font-medium"
-                    >
-                      Blog Name:
-                    </label>
-                    <input
-                      type="text"
-                      id="category_name"
-                      className="border border-gray-300 text-sm rounded-lg block w-full p-2.5"
-                      placeholder="Enter Category Name..."
-                      value={categoryName}
-                      onChange={(e) => {
-                        setCategoryName(e.target.value);
-                      }}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="blog_subcategory"
-                      className="block mb-2 text-sm font-medium"
-                    >
-                      Blog Sub Category:
-                    </label>
-                    <select
-                      name="blog_subcategory"
-                      placeholder=""
-                      className="border border-gray-300 text-sm rounded-lg block w-full p-2.5"
-                      id="blog_subcategory"
-                      value={subCategory}
-                      onChange={(e) => {
-                        setSubCategory(e.target.value);
-                      }}
-                      required
-                    >
-                      <option value="Null">Null</option>
-                      {blogCategory.map((e) => {
-                        return (
-                          <>
-                            <option value={e.id}>{e.category_name}</option>
-                          </>
-                        );
-                      })}
-                    </select>
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="category_desc"
-                      className="block mb-2 text-sm font-medium"
-                    >
-                      Blog Description:
-                    </label>
-                    <input
-                      type="text"
-                      id="category_desc"
-                      className="border border-gray-300 text-sm rounded-lg block w-full p-2.5"
-                      placeholder="Enter Category Description..."
-                      value={categoryDesc}
-                      onChange={(e) => {
-                        setCategoryDesc(e.target.value);
-                      }}
-                      required
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br shadow-lg shadow-blue-500/50 rounded-lg text-sm py-2.5 text-center"
+        <div className="w-5/12 absolute top-8 right-0 mt-4 flex justify-center items-center">
+          <div className="w-9/12 shadow-lg text-gray-500 px-3 py-2">
+            <form method="post" onSubmit={savedata}>
+              <p className="font-bold text-xl text-gray-700 mb-3">
+                ADD BLOG CATEGORY
+              </p>
+              <div className="grid gap-4 mb-6">
+                <div>
+                  <label
+                    htmlFor="category_name"
+                    className="block mb-2 text-sm font-medium"
                   >
-                    SAVE
-                  </button>
+                    Blog Name:
+                  </label>
+                  <input
+                    type="text"
+                    id="category_name"
+                    className="border border-gray-300 text-sm rounded-lg block w-full p-2.5"
+                    placeholder="Enter Category Name..."
+                    value={categoryName}
+                    onChange={(e) => {
+                      setCategoryName(e.target.value);
+                    }}
+                    required
+                  />
                 </div>
-              </form>
-            </div>
+                <div>
+                  <label
+                    htmlFor="blog_subcategory"
+                    className="block mb-2 text-sm font-medium"
+                  >
+                    Blog Sub Category:
+                  </label>
+                  <select
+                    name="blog_subcategory"
+                    placeholder=""
+                    className="border border-gray-300 text-sm rounded-lg block w-full p-2.5"
+                    id="blog_subcategory"
+                    value={subCategory}
+                    onChange={(e) => {
+                      setSubCategory(e.target.value);
+                    }}
+                    required
+                  >
+                    <option value="Null">Null</option>
+                    {blogCategory.map((e) => {
+                      return (
+                        <>
+                          <option value={e.id}>{e.category_name}</option>
+                        </>
+                      );
+                    })}
+                  </select>
+                </div>
+                <div>
+                  <label
+                    htmlFor="category_desc"
+                    className="block mb-2 text-sm font-medium"
+                  >
+                    Blog Description:
+                  </label>
+                  <input
+                    type="text"
+                    id="category_desc"
+                    className="border border-gray-300 text-sm rounded-lg block w-full p-2.5"
+                    placeholder="Enter Category Description..."
+                    value={categoryDesc}
+                    onChange={(e) => {
+                      setCategoryDesc(e.target.value);
+                    }}
+                    required
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br shadow-lg shadow-blue-500/50 rounded-lg text-sm py-2.5 text-center"
+                >
+                  SAVE
+                </button>
+              </div>
+            </form>
           </div>
-        )}
+        </div>
       </div>
       <DeleteModal
         isOpen={isDeleteModalOpen}

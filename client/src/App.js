@@ -2,7 +2,8 @@ import React from "react";
 import HomeRoute from "./routes/HomeRoute";
 import LoginRoute from "./routes/admin/LoginRoute";
 import DashRoute from "./routes/admin/DashRoute";
-import BlogRoute from "./routes/admin/BlogRoute";
+import BlogCateRoute from "./routes/admin/BlogCateRoute";
+import BlogPostRoute from "./routes/admin/BlogPostRoute";
 
 const App = () => {
   return (
@@ -10,7 +11,8 @@ const App = () => {
       <HomeRoute />
       <LoginRoute />
       <DashRoute />
-      <BlogRoute />
+      <BlogCateRoute />
+      <BlogPostRoute />
     </>
   );
 };

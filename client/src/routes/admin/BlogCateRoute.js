@@ -1,8 +1,8 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Blog from "../../pages/admin/blog";
+import BlogCategory from "../../pages/admin/blogCategory";
 
-const BlogRoute = () => {
+const BlogCateRoute = () => {
   return (
     <>
       <Routes>
@@ -10,7 +10,7 @@ const BlogRoute = () => {
           path="blogcategory"
           element={
             <>
-              <Blog />
+              <BlogCategory />
             </>
           }
         />
@@ -19,4 +19,4 @@ const BlogRoute = () => {
   );
 };
 
-export default BlogRoute;
+export default BlogCateRoute;
