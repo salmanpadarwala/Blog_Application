@@ -121,18 +121,11 @@ const AllBlog = () => {
   }, [searchFilter, categoryFilter, blogPost]);
 
   const itemPerPage = 10;
-
-  const numberOfPage = Math.ceil(filteredBlogPost.length / itemPerPage);
-  const pageIndex = Array.from({ length: numberOfPage }, (_, idx) => idx + 1);
-
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
   const rows = filteredBlogPost.slice(
     currentPage * itemPerPage,
     (currentPage + 1) * itemPerPage
   );
+
   return (
     <>
       <section className="dashboard relative px-6 py-3 bg-slate-950 shadow-md">
@@ -164,22 +157,48 @@ const AllBlog = () => {
           </NavLink>
         </div>
 
-        <div className="flex mt-5 mb-2 text-sm">
-          <NavLink onClick={getPosts}>
-            <p>All ({df + pb})</p>
-          </NavLink>
-          <p className="mx-2">|</p>
-          <NavLink onClick={getPublishedPost}>
-            <p>Published ({pb})</p>
-          </NavLink>
-          <p className="mx-2">|</p>
-          <NavLink onClick={getDraftPost}>
-            <p>Draft ({df})</p>
-          </NavLink>
-          <p className="mx-2">|</p>
-          <NavLink to={"/alltrashblogpost"}>
-            <p className="text-red-500">Trash</p>
-          </NavLink>
+        <div className="flex mt-5 mb-2 text-sm justify-between">
+          <div className="flex">
+            <NavLink onClick={getPosts}>
+              <p>All ({df + pb})</p>
+            </NavLink>
+            <p className="mx-2">|</p>
+            <NavLink onClick={getPublishedPost}>
+              <p>Published ({pb})</p>
+            </NavLink>
+            <p className="mx-2">|</p>
+            <NavLink onClick={getDraftPost}>
+              <p>Draft ({df})</p>
+            </NavLink>
+            <p className="mx-2">|</p>
+            <NavLink to={"/alltrashblogpost"}>
+              <p className="text-red-500">Trash</p>
+            </NavLink>
+          </div>
+          <div>
+            <label className="mr-2">
+              <b>Category :</b>
+            </label>
+            <select
+              value={categoryFilter}
+              onChange={(e) => setCategoryFilter(e.target.value)}
+              style={{
+                padding: "5px",
+                borderRadius: "5px",
+                border: "1px solid rgba(0, 0, 0, 0.2)",
+                outline: "0",
+                fontSize: "14px",
+                width: "10rem",
+              }}
+            >
+              <option value="">All categories</option>
+              {blogCategory.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.category_name}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
 
         <div className="flex">

@@ -5,6 +5,7 @@ import Sidebar from "../../pages/admin/layout/Sidebar";
 import AddBlog from "../../pages/admin/blogPost/AddBlog";
 import EditBlog from "../../pages/admin/blogPost/EditBlog";
 import AllTrashBlog from "../../pages/admin/blogPost/AllTrashBlog";
+import ViewBlog from "../../pages/admin/blogPost/ViewBlog";
 
 const BlogPostRoute = () => {
   return (
@@ -42,6 +43,15 @@ const BlogPostRoute = () => {
             <>
               <Sidebar />
               <AllTrashBlog />
+            </>
+          }
+        />
+        <Route
+          path="preview/:id"
+          element={
+            <>
+              <Sidebar />
+              <ViewBlog />
             </>
           }
         />
