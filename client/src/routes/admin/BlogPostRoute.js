@@ -30,6 +30,7 @@ const BlogPostRoute = () => {
           path="editblogpost/:id"
           element={
             <>
+              <Sidebar />
               <EditBlog />
             </>
           }

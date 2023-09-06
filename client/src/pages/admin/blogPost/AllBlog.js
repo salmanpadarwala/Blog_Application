@@ -203,7 +203,7 @@ const AllBlog = () => {
                     Blog Tags
                   </th>
                   <th scope="col" className="px-4 py-3">
-                    Blog Published Date
+                    Published Date
                   </th>
                 </tr>
               </thead>
@@ -216,10 +216,10 @@ const AllBlog = () => {
                       <>
                         <tr
                           key={e.id}
-                          className="text-center border-b border-gray-300 group"
+                          className="text-center border-b border-gray-300 group align-top"
                         >
                           <td
-                            className="py-4"
+                            className="pb-3"
                             style={{ textAlign: "-webkit-center" }}
                           >
                             <img
@@ -231,7 +231,7 @@ const AllBlog = () => {
                               alt="blog_post"
                             />
                           </td>
-                          <td className="py-4 group hover:visible">
+                          <td className="group hover:visible">
                             {e.blog_title}
                             <p className="text-sm opacity-0 group-hover:opacity-100">
                               <div className="flex">
@@ -256,8 +256,8 @@ const AllBlog = () => {
                               </div>
                             </p>
                           </td>
-                          <td className="py-4">{e.blog_author}</td>
-                          <td className="py-4">
+                          <td>{e.blog_author}</td>
+                          <td>
                             {blogCategory.map((x) => {
                               if (e.blog_category === x.id) {
                                 flag = 1;
@@ -266,8 +266,8 @@ const AllBlog = () => {
                             })}
                             {flag === 0 ? "null" : ""}
                           </td>
-                          <td className="py-4">{e.blog_tags}</td>
-                          <td className="py-4">
+                          <td>{e.blog_tags}</td>
+                          <td>
                             {e.blog_status === 0 ? (
                               <p>Draft</p>
                             ) : (
