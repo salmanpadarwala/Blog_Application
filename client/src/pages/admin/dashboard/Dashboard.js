@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../../assets/css/admin/style.css";
 import axios from "axios";
+import PORT from "../../../assets/constant/Url";
 
 const Dashboard = () => {
   const [blogPost, setBlogPost] = useState([]);
@@ -15,7 +16,7 @@ const Dashboard = () => {
 
   const getPosts = async () => {
     try {
-      const res = await axios.get("/getblogposts");
+      const res = await axios.get(`${PORT}getblogposts`);
       setBlogPost(res.data);
 
       res.data.map((e, idx) => {

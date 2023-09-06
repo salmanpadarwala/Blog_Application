@@ -4,6 +4,7 @@ import BlogPost from "../../pages/admin/blogPost";
 import Sidebar from "../../pages/admin/layout/Sidebar";
 import AddBlog from "../../pages/admin/blogPost/AddBlog";
 import EditBlog from "../../pages/admin/blogPost/EditBlog";
+import AllTrashBlog from "../../pages/admin/blogPost/AllTrashBlog";
 
 const BlogPostRoute = () => {
   return (
@@ -32,6 +33,15 @@ const BlogPostRoute = () => {
             <>
               <Sidebar />
               <EditBlog />
+            </>
+          }
+        />
+        <Route
+          path="alltrashblogpost"
+          element={
+            <>
+              <Sidebar />
+              <AllTrashBlog />
             </>
           }
         />

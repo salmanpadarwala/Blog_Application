@@ -177,7 +177,7 @@ const AllBlog = () => {
             <p>Draft ({df})</p>
           </NavLink>
           <p className="mx-2">|</p>
-          <NavLink to={"/"}>
+          <NavLink to={"/alltrashblogpost"}>
             <p className="text-red-500">Trash</p>
           </NavLink>
         </div>

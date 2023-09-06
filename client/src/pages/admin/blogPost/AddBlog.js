@@ -119,17 +119,6 @@ const AddBlog = () => {
   };
 
   const [open, setOpen] = React.useState(false);
-  const [scroll, setScroll] = React.useState("paper");
-
-  const handleClickOpen = (scrollType) => () => {
-    setOpen(true);
-    setScroll(scrollType);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   const descriptionElementRef = React.useRef(null);
   React.useEffect(() => {
     if (open) {
@@ -139,39 +128,6 @@ const AddBlog = () => {
       }
     }
   }, [open]);
-
-  const [categoryName, setCategoryName] = useState("");
-  const [categoryDesc, setCategoryDesc] = useState("");
-  const [subCategory, setSubCategory] = useState(null);
-  const saveblogcategory = async (e) => {
-    e.preventDefault();
-    const team = {
-      categoryName: categoryName,
-      categoryDesc: categoryDesc,
-      subCategory: subCategory,
-    };
-    console.log(team);
-    try {
-      await axios
-        .post(`${PORT}addblogcategory`, team)
-        .then((res) => {
-          console.log(res);
-          toast.success("Category Added Successfully");
-          setOpen(false);
-          setCategoryName("");
-          setCategoryDesc("");
-          setSubCategory("");
-          getData();
-        })
-        .catch((e) => {
-          toast.error("Category Failed");
-        });
-    } catch (error) {
-      toast.error("Category Failed");
-    }
-  };
-
-  // keyword
 
   // Function to handle Enter key press
   const handleKeyword = (event) => {
@@ -466,7 +422,7 @@ const AddBlog = () => {
                     );
                   })}
                 </select>
-                <NavLink onClick={handleClickOpen("paper")}>
+                <NavLink to="blogcategory">
                   <div className="text-sm text-blue-400 mt-1 hover:underline">
                     Add New Category
                   </div>
