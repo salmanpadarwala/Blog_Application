@@ -121,6 +121,14 @@ const AllBlog = () => {
   }, [searchFilter, categoryFilter, blogPost]);
 
   const itemPerPage = 10;
+
+  const numberOfPage = Math.ceil(filteredBlogPost.length / itemPerPage);
+  const pageIndex = Array.from({ length: numberOfPage }, (_, idx) => idx + 1);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   const rows = filteredBlogPost.slice(
     currentPage * itemPerPage,
     (currentPage + 1) * itemPerPage
@@ -174,30 +182,6 @@ const AllBlog = () => {
             <NavLink to={"/alltrashblogpost"}>
               <p className="text-red-500">Trash</p>
             </NavLink>
-          </div>
-          <div>
-            <label className="mr-2">
-              <b>Category :</b>
-            </label>
-            <select
-              value={categoryFilter}
-              onChange={(e) => setCategoryFilter(e.target.value)}
-              style={{
-                padding: "5px",
-                borderRadius: "5px",
-                border: "1px solid rgba(0, 0, 0, 0.2)",
-                outline: "0",
-                fontSize: "14px",
-                width: "10rem",
-              }}
-            >
-              <option value="">All categories</option>
-              {blogCategory.map((category) => (
-                <option key={category.id} value={category.id}>
-                  {category.category_name}
-                </option>
-              ))}
-            </select>
           </div>
         </div>
 
@@ -254,10 +238,9 @@ const AllBlog = () => {
                             {e.blog_title}
                             <p className="text-sm opacity-0 group-hover:opacity-100">
                               <div className="flex">
-                                <NavLink to={`/preview/${e.id}`}>
+                                <NavLink to={`/blogpreview/${e.id}`}>
                                   <p className="text-lime-500">View |</p>
                                 </NavLink>
-
                                 <NavLink
                                   to={`/editblogpost/${e.id}`}
                                   state={{ content: e.blog_content }}
@@ -306,6 +289,35 @@ const AllBlog = () => {
               </tbody>
             </table>
           </div>
+        </div>
+        <div className="flex justify-end mt-4">
+          <button
+            disabled={currentPage <= 0}
+            onClick={() => handlePageChange(currentPage - 1)}
+            className="bg-blue-500 text-white px-2 py-1 rounded cursor-pointer"
+          >
+            <i className="fa-solid fa-arrow-left"></i>
+          </button>
+          {pageIndex.map((page) => (
+            <button
+              key={page}
+              onClick={() => handlePageChange(page - 1)}
+              className={`px-3 py-1 mx-1 text-gray-600 rounded-md ${
+                currentPage === page - 1
+                  ? "bg-blue-500 text-white hover:bg-blue-600"
+                  : "bg-gray-500 text-white hover:bg-gray-600"
+              }`}
+            >
+              {page}
+            </button>
+          ))}
+          <button
+            disabled={currentPage >= numberOfPage - 1}
+            onClick={() => handlePageChange(currentPage + 1)}
+            className="bg-blue-500 text-white px-2 py-1 rounded cursor-pointer"
+          >
+            <i className="fa-solid fa-arrow-right"></i>
+          </button>
         </div>
       </div>
       <DeleteModal

@@ -1,15 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, NavLink } from "react-router-dom";
-import {
-  EditorState,
-  convertToRaw,
-  convertFromRaw,
-  AtomicBlockUtils,
-  Entity,
-} from "draft-js";
+import { EditorState, convertToRaw } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import slugify from "slugify";
@@ -22,7 +16,6 @@ const AddBlog = () => {
   const [blogTitle, setBlogTitle] = useState("");
   const [blogDesc, setBlogDesc] = useState("");
   const [blogSlug, setBlogSlug] = useState("");
-  const [blogContent, setBlogContent] = useState("");
   const [blogAuthor, setBlogAuthor] = useState("");
   const [blogPublishDate, setBlogPublishDate] = useState("");
   const [blogImage, setBlogImage] = useState("");
@@ -38,7 +31,6 @@ const AddBlog = () => {
     try {
       const res = await axios.get(`${PORT}getblogcategory`);
       setCategory(res.data);
-      console.log(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -103,24 +95,18 @@ const AddBlog = () => {
       reader.onloadend = () => {
         const formData = new FormData();
         formData.append("image", file);
-        axios
-          .post(`${PORT}saveimg`, formData)
-
-          .then((data) => {
-            console.log(data);
-            console.log("Uploaded Data", data);
-            const { imageLink } = data.data;
-            console.log(imageLink);
-            resolve({ data: { link: imageLink } });
-          });
+        axios.post(`${PORT}saveimg`, formData).then((data) => {
+          const { imageLink } = data.data;
+          resolve({ data: { link: imageLink } });
+        });
       };
       reader.readAsDataURL(file);
     });
   };
 
-  const [open, setOpen] = React.useState(false);
-  const descriptionElementRef = React.useRef(null);
-  React.useEffect(() => {
+  const [open, setOpen] = useState(false);
+  const descriptionElementRef = useRef(null);
+  useEffect(() => {
     if (open) {
       const { current: descriptionElement } = descriptionElementRef;
       if (descriptionElement !== null) {
@@ -135,8 +121,6 @@ const AddBlog = () => {
       // Add the entered keyword to the keywords array
       event.preventDefault();
       setBlogKeywords([...blogKeywords, event.target.value]);
-      console.log(event.target.value);
-      console.log(blogKeywords);
       // Clear the input field
       event.target.value = "";
     }
@@ -181,7 +165,6 @@ const AddBlog = () => {
       formdata.append("blogTags", blogTags);
       formdata.append("blogStatus", blogStatus);
       formdata.append("blogSlug", blogSlug);
-      console.log(blogTags);
       const res = axios.post(`${PORT}addblogpost`, formdata);
 
       if (!res) {
@@ -213,7 +196,7 @@ const AddBlog = () => {
       if (isAvailable) {
         incrementSlug(blogSlug);
       } else {
-        console.log("Slug is not available");
+        toast.success("Slug is not available");
       }
     } catch (error) {
       console.error("Error checking slug availability:", error);
@@ -224,11 +207,9 @@ const AddBlog = () => {
     const lastChar = slug[slug.length - 1];
 
     if (!isNaN(lastChar)) {
-      // Last character is a number, increment it by 1
       const newLastChar = parseInt(lastChar, 10) + 1;
       setBlogSlug(slug.slice(0, -1) + newLastChar);
     } else {
-      // Last character is an alphabet, append '1' to the slug
       setBlogSlug(slug + "1");
     }
   };
@@ -251,7 +232,6 @@ const AddBlog = () => {
         pauseOnHover
         theme="dark"
       />
-
       <section className="dashboard relative px-6 py-3 bg-slate-950 shadow-md">
         <div className="flex justify-between items-center">
           <div className="relative flex items-center w-5/12 ml-auto">

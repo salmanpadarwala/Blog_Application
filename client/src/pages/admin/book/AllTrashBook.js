@@ -5,19 +5,19 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PORT from "../../../assets/constant/Url";
 
-const AllTrashBlog = () => {
-  const [blogCategory, setBlogCategory] = useState([]);
-  const [blogPost, setBlogPost] = useState([]);
+const AllTrashBook = () => {
+  const [categoryFilter, setCategoryFilter] = useState("");
+  const [BookCategory, setBookCategory] = useState([]);
+  const [Books, setBooks] = useState([]);
   const [searchFilter, setSearchFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
-  const [pb, setPb] = useState(0);
+  const [TotalBooks, setTotalBooks] = useState(0);
 
-  const getPosts = async () => {
+  const getBooks = async () => {
     try {
-      const res = await axios.get(`${PORT}gettrashblogpost`);
-      setBlogPost(res.data);
-
-      setPb(res.data.length);
+      const res = await axios.get(`${PORT}gettrashbooks`);
+      setBooks(res.data);
+      setTotalBooks(res.data.length);
     } catch (err) {
       console.log(err);
     }
@@ -25,46 +25,64 @@ const AllTrashBlog = () => {
 
   const getData = async () => {
     try {
-      const res = await axios.get(`${PORT}getblogcategory`);
-      setBlogCategory(res.data);
+      const res = await axios.get(`${PORT}getbookcategory`);
+      setBookCategory(res.data);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    getPosts();
+    getBooks();
     getData();
   }, []);
 
-  const trashBackBlogPost = async (id) => {
-    try {
-      const res = await axios.patch(`${PORT}trashbackblogpost/${id}`);
-      getPosts();
-    } catch (error) {
-      window.alert(error);
-    }
+  const [filterBooks, setfilterBooks] = useState(Books);
+  const filterBook = () => {
+    const searchTerm = searchFilter.toLowerCase();
+    const filteredBooks = Books.filter((item) => {
+      const title = item.book_title.toLowerCase().includes(searchTerm);
+      const author = item.book_author.toLowerCase().startsWith(searchTerm);
+      const bookdesc = item.book_description
+        .toLowerCase()
+        .startsWith(searchTerm);
+      const categoryMatches =
+        categoryFilter === "" || item.books_category == categoryFilter;
+
+      return (title || author || bookdesc) && categoryMatches;
+    });
+    setfilterBooks(filteredBooks);
   };
 
+  useEffect(() => {
+    filterBook();
+  }, [searchFilter, categoryFilter, Books]);
+
   const itemPerPage = 10;
-
-  const numberOfPage = Math.ceil(blogPost.length / itemPerPage);
+  const numberOfPage = Math.ceil(filterBooks.length / itemPerPage);
   const pageIndex = Array.from({ length: numberOfPage }, (_, idx) => idx + 1);
-
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-
-  const rows = blogPost.slice(
+  const rows = filterBooks.slice(
     currentPage * itemPerPage,
     (currentPage + 1) * itemPerPage
   );
 
-  const DeletePost = async (id) => {
+  const trashBackBook = async (id) => {
     try {
-      const res = await axios.delete(`${PORT}deletepost/${id}`);
-      toast.success("Post Delete Successfully");
-      getPosts();
+      const res = await axios.patch(`${PORT}trashbackbook/${id}`);
+      getBooks();
+    } catch (error) {
+      toast.error(error);
+    }
+  };
+
+  const DeleteBook = async (id) => {
+    try {
+      const res = await axios.delete(`${PORT}deletebook/${id}`);
+      toast.success("Book Delete Successfully");
+      getBooks();
     } catch (error) {
       toast.error(error);
     }
@@ -73,18 +91,17 @@ const AllTrashBlog = () => {
   const DeleteAlert = async (id) => {
     let title;
     try {
-      const res = await axios.get(`${PORT}getblogpostdetail/${id}`);
-      title = res.data[0].blog_title;
+      const res = await axios.get(`${PORT}getbookdetail/${id}`);
+      title = res.data[0].book_title;
     } catch (error) {
       toast.error(error);
     }
     let x = window.prompt(`Enter Title Name = ${title} `, "");
     if (x == title) {
-      DeletePost(id);
-    } else {
-      toast.error("Oops ! Title is Incorrect");
+      DeleteBook(id);
     }
   };
+
   return (
     <>
       <ToastContainer
@@ -104,73 +121,61 @@ const AllTrashBlog = () => {
           <div className="relative flex items-center w-5/12 ml-auto">
             <input
               type="text"
-              placeholder="Search Blog Post..."
+              placeholder="Search Books..."
               className="border border-gray-300 w-full rounded-md px-3 py-2 pr-10 focus:outline-none"
-              value={searchFilter}
-              onChange={(e) => {
-                setSearchFilter(e.target.value);
-              }}
             />
             <i className="fa-solid fa-search text-gray-600 absolute right-3 top-1/2 transform -translate-y-1/2"></i>
           </div>
         </div>
       </section>
-
       <div className="relative dashboard px-5 mt-8">
         <div className="flex align-center">
           <i className="fa-regular fa-clock py-1 px-2 relative bg-blue-500 rounded-md cursor-pointer text-white text-2xl"></i>
-          <span className="font-bold ml-3 text-2xl pt-1">
-            All Trash Blog Post
-          </span>
+          <span className="font-bold ml-3 text-2xl pt-1">Trash Books</span>
         </div>
-
         <div className="flex mt-5 mb-2 text-sm">
-          <NavLink to={"/allblogpost"}>
+          <NavLink to={"/allbooks"}>
             <p className="text-blue-500">
               <i className="fa-solid fa-arrow-left-long"></i> Back
             </p>
           </NavLink>
           <p className="mx-2">|</p>
-          <NavLink to={"/allblogpost"}>
-            <p className="text-red-500">Trash({pb})</p>
-          </NavLink>
+          <p className="text-red-500">Trash</p>
         </div>
         <div className="flex">
           <div className="shadow-lg w-full h-min">
             <table className="text-gray-500 w-full">
               <thead className="text-md text-gray-700 bg-gray-100">
                 <tr>
+                  <th scope="col" className="px-4 py-3">
+                    Thumbnail
+                  </th>
                   <th scope="col" className="px-4 py-3 cursor-pointer">
-                    Blog Title
+                    PDF
                   </th>
                   <th scope="col" className="px-4 py-3">
-                    Blog Author
+                    Title
                   </th>
                   <th scope="col" className="px-4 py-3">
-                    Blog Category
+                    Author
                   </th>
                   <th scope="col" className="px-4 py-3">
-                    Blog Tags
+                    Description
                   </th>
                   <th scope="col" className="px-4 py-3">
-                    Published Date
+                    Download
+                  </th>
+                  <th scope="col" className="px-4 py-3">
+                    Category
+                  </th>
+                  <th scope="col" className="px-4 py-3">
+                    Date & Time
                   </th>
                 </tr>
               </thead>
               <tbody>
-                {rows.length > 0 ? (
-                  rows
-                    .filter((item) => {
-                      const searchTerm = searchFilter.toLowerCase();
-                      return (
-                        item.blog_title.startsWith(searchTerm) ||
-                        item.blog_author.startsWith(searchTerm) ||
-                        item.blog_tags.startsWith(searchTerm) ||
-                        item.blog_publish_date.startsWith(searchTerm)
-                      );
-                    })
-
-                    .map((e, idx) => {
+                {rows.length > 0
+                  ? rows.map((e) => {
                       let flag = 0;
 
                       return (
@@ -179,61 +184,79 @@ const AllTrashBlog = () => {
                             key={e.id}
                             className="text-center border-b border-gray-300 group align-top"
                           >
-                            <td className="group hover:visible">
-                              {e.blog_title}
+                            <td style={{ textAlign: "-webkit-center" }}>
+                              {e.book_thumbnail != "" ? (
+                                <img
+                                  src={`./upload/${e.book_thumbnail}`}
+                                  height="50px"
+                                  width="50px"
+                                  alt="books"
+                                />
+                              ) : (
+                                <p>Not Found</p>
+                              )}
+                            </td>
+                            <td className="pb-3 pt-1">
+                              {e.book_pdf != "" ? (
+                                <img
+                                  src={require(`../../../assets/image/pdf2.webp`)}
+                                  height="50px"
+                                  width="50px"
+                                  alt="book_pdf"
+                                />
+                              ) : (
+                                <p>Not Found</p>
+                              )}
+                            </td>
+                            <td>
+                              {e.book_title}
                               <p className="text-sm opacity-0 group-hover:opacity-100">
                                 <div className="flex">
-                                  <NavLink>
-                                    <p
-                                      onClick={() => {
-                                        trashBackBlogPost(e.id);
-                                      }}
-                                    >
+                                  <p
+                                    onClick={() => {
+                                      trashBackBook(e.id);
+                                    }}
+                                  >
+                                    <p className="text-blue-400 cursor-pointer">
                                       Restore
                                     </p>
-                                  </NavLink>
+                                  </p>
                                   <p className="mx-1">|</p>
-                                  <NavLink>
-                                    <p
-                                      className="text-red-500"
-                                      onClick={() => {
-                                        DeleteAlert(e.id);
-                                      }}
-                                    >
-                                      Permenently Delete
-                                    </p>
-                                  </NavLink>
+                                  <p
+                                    className="text-red-500 cursor-pointer"
+                                    onClick={() => {
+                                      DeleteAlert(e.id);
+                                    }}
+                                  >
+                                    Permenently Delete
+                                  </p>
                                 </div>
                               </p>
                             </td>
-                            <td>{e.blog_author}</td>
+                            <td> {e.book_author}</td>
+                            <td>{e.book_description}</td>
                             <td>
-                              {blogCategory.map((x) => {
-                                if (e.blog_category === x.id) {
+                              {e.book_isdownload == 0 ? <p>No</p> : <p>Yes</p>}
+                            </td>
+
+                            <td>
+                              {BookCategory.map((x) => {
+                                if (e.books_category === x.id) {
                                   flag = 1;
                                   return x.category_name;
                                 }
                               })}
                               {flag === 0 ? "null" : ""}
                             </td>
-                            <td>{e.blog_tags}</td>
                             <td>
-                              {e.blog_status == 0 ? (
-                                <p className="m-0 p-0">Draft</p>
-                              ) : (
-                                <p className="m-0 p-0">Published</p>
-                              )}
-                              {e.blog_publish_date} {e.blog_time}
+                              <p>{e.upload_date}</p>
+                              <p>{e.book_publish_time}</p>
                             </td>
                           </tr>
                         </>
                       );
                     })
-                ) : (
-                  <tr>
-                    <td colSpan="6">Empty</td>
-                  </tr>
-                )}
+                  : ""}
               </tbody>
             </table>
           </div>
@@ -272,4 +295,4 @@ const AllTrashBlog = () => {
   );
 };
 
-export default AllTrashBlog;
+export default AllTrashBook;

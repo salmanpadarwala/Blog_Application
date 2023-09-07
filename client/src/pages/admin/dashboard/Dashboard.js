@@ -8,6 +8,10 @@ const Dashboard = () => {
   const [df, setDf] = useState(0);
   const [getBlogCate, setGetBlogCate] = useState(0);
   const [getPublishBlog, setGetPublishBlog] = useState(0);
+  const [getBookCate, setGetBookCate] = useState(0);
+  const [getBookPost, setGetBookPost] = useState(0);
+  const [getNameCate, setGetNameCate] = useState(0);
+  const [getNames, setGetNames] = useState(0);
   let published = 0;
   let draft = 0;
 
@@ -15,6 +19,10 @@ const Dashboard = () => {
     getPosts();
     getCategoryData();
     getPublishedPost();
+    getBookCateData();
+    getBooksData();
+    getNameCategory();
+    getNamesPost();
   }, []);
 
   const getPosts = async () => {
@@ -33,7 +41,6 @@ const Dashboard = () => {
       console.log(err);
     }
   };
-
   //GET BLOG CATEGORY DATA
   const getCategoryData = async () => {
     try {
@@ -43,12 +50,47 @@ const Dashboard = () => {
       console.log(error);
     }
   };
-
   //GET PUBLISH BLOG
   const getPublishedPost = async () => {
     try {
       const res = await axios.get(`${PORT}getpublishedblogpost`);
       setGetPublishBlog(res.data.length);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  //GET BOOK CATEGORY
+  const getBookCateData = async () => {
+    try {
+      const res = await axios.get(`${PORT}getbookcategory`);
+      setGetBookCate(res.data.length);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //GET BOOK DATA
+  const getBooksData = async () => {
+    try {
+      const res = await axios.get(`${PORT}getbooks`);
+      setGetBookPost(res.data.length);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  //GET NAME CATEGORY
+  const getNameCategory = async () => {
+    try {
+      const res = await axios.get(`${PORT}getnamescategory`);
+      setGetNameCate(res.data.length);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //GET NAME POST
+  const getNamesPost = async () => {
+    try {
+      const res = await axios.get(`${PORT}getnames`);
+      setGetNames(res.data.length);
     } catch (err) {
       console.log(err);
     }
@@ -70,23 +112,33 @@ const Dashboard = () => {
             </div>
             <div className="boxes flex flex-col items-center">
               <i className="fa-solid fa-p"></i>
-              <span>Total Posts</span>
+              <span>Total Blogs</span>
               <span>{df + pb}</span>
             </div>
             <div className="boxes flex flex-col items-center">
               <i className="fa-solid fa-p"></i>
-              <span>Publish Posts</span>
+              <span>Publish Blogs</span>
               <span>{getPublishBlog}</span>
             </div>
-            <div className="boxes flex flex-col items-center">
+            <div className="boxes boxe1 flex flex-col items-center">
               <i className="fa-solid fa-p"></i>
-              <span>Total Posts</span>
-              <span>2</span>
+              <span>Book Category</span>
+              <span>{getBookCate}</span>
             </div>
-            <div className="boxes flex flex-col items-center">
+            <div className="boxes boxe1 flex flex-col items-center">
               <i className="fa-solid fa-p"></i>
-              <span>Total Posts</span>
-              <span>2</span>
+              <span>Book Posts</span>
+              <span>{getBookPost}</span>
+            </div>
+            <div className="boxes boxe1 flex flex-col items-center">
+              <i className="fa-solid fa-p"></i>
+              <span>Name Category</span>
+              <span>{getNameCate}</span>
+            </div>
+            <div className="boxes boxe1 flex flex-col items-center">
+              <i className="fa-solid fa-p"></i>
+              <span>Names Post</span>
+              <span>{getNames}</span>
             </div>
           </div>
         </div>

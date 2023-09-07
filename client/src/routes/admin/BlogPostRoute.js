@@ -47,7 +47,7 @@ const BlogPostRoute = () => {
           }
         />
         <Route
-          path="preview/:id"
+          path="blogpreview/:id"
           element={
             <>
               <Sidebar />

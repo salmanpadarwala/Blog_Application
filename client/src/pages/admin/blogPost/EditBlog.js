@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import {
-  EditorState,
-  convertToRaw,
-  convertFromRaw,
-  ContentState,
-  Entity,
-} from "draft-js";
+import { EditorState, convertToRaw, ContentState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import htmlToDraft from "html-to-draftjs";
@@ -41,12 +35,8 @@ const EditBlog = () => {
   // Function to handle Enter key press
   const handleKeyword = (event) => {
     if (event.key === "Enter" || event.key == ",") {
-      // Add the entered keyword to the keywords array
       event.preventDefault();
       setBlogKeywords([...blogKeywords, event.target.value]);
-      console.log(event.target.value);
-      console.log(blogKeywords);
-      // Clear the input field
       event.target.value = "";
     }
   };
@@ -63,9 +53,6 @@ const EditBlog = () => {
       // Add the entered keyword to the keywords array
       event.preventDefault();
       setBlogTags([...blogTags, event.target.value]);
-      console.log(event.target.value);
-      console.log(blogTags);
-      // Clear the input field
       event.target.value = "";
     }
   };
@@ -103,7 +90,7 @@ const EditBlog = () => {
       setBlogTags(strtags.split(","));
       setBlogSlug(res.data[0].blog_slug);
     } catch (error) {
-      window.alert(error);
+      toast.error(error);
     }
   };
 
@@ -182,10 +169,7 @@ const EditBlog = () => {
           .post(`${PORT}saveimg`, formData)
 
           .then((data) => {
-            console.log(data);
-            console.log("Uploaded Data", data);
             const { imageLink } = data.data;
-            console.log(imageLink);
             resolve({ data: { link: imageLink } });
           });
       };
@@ -196,10 +180,8 @@ const EditBlog = () => {
   // Save the data in database
   const savedata = async (e, blogStatus) => {
     e.preventDefault();
-
     try {
       const formdata = new FormData();
-
       formdata.append("blogTitle", blogTitle);
       formdata.append("blogDesc", blogDesc);
       formdata.append("blogContent", convertedContent);
@@ -242,16 +224,12 @@ const EditBlog = () => {
       );
       const { isAvailable } = response.data;
 
-      // Handle the response accordingly
       if (isAvailable) {
-        // Slug is available
         incrementSlug(blogSlug);
-        console.log("Slug is available");
       } else {
-        console.log("Slug is same as original");
+        toast.success("Slug is same as original");
       }
     } catch (error) {
-      // Handle any errors
       console.error("Error checking slug availability:", error);
     }
   };
@@ -260,11 +238,9 @@ const EditBlog = () => {
     const lastChar = slug[slug.length - 1];
 
     if (!isNaN(lastChar)) {
-      // Last character is a number, increment it by 1
       const newLastChar = parseInt(lastChar, 10) + 1;
       setBlogSlug(slug.slice(0, -1) + newLastChar);
     } else {
-      // Last character is an alphabet, append '1' to the slug
       setBlogSlug(slug + "1");
     }
   };
