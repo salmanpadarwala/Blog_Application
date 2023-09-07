@@ -4,6 +4,8 @@ import LoginRoute from "./routes/admin/LoginRoute";
 import DashRoute from "./routes/admin/DashRoute";
 import BlogCateRoute from "./routes/admin/BlogCateRoute";
 import BlogPostRoute from "./routes/admin/BlogPostRoute";
+import BookCategoryRoute from "./routes/admin/BookCategoryRoute";
+import BookRoute from "./routes/admin/BookRoute";
 
 const App = () => {
   return (
@@ -13,6 +15,8 @@ const App = () => {
       <DashRoute />
       <BlogCateRoute />
       <BlogPostRoute />
+      <BookCategoryRoute />
+      <BookRoute />
     </>
   );
 };

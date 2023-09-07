@@ -422,7 +422,7 @@ const AddBlog = () => {
                     );
                   })}
                 </select>
-                <NavLink to="blogcategory">
+                <NavLink to="/blogcategory">
                   <div className="text-sm text-blue-400 mt-1 hover:underline">
                     Add New Category
                   </div>

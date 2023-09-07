@@ -56,7 +56,6 @@ const Sidebar = () => {
               <span className="ml-3">Blog Category</span>
             </NavLink>
           </div>
-
           <div
             className={`mb-2 cursor-pointer py-2 pl-3 pr-6 rounded-md ${
               location.pathname === "/allblogpost"
@@ -67,6 +66,30 @@ const Sidebar = () => {
             <NavLink to="/allblogpost">
               <i className="fa-solid fa-layer-group"></i>
               <span className="ml-3">Blog Post</span>
+            </NavLink>
+          </div>
+          <div
+            className={`mb-2 cursor-pointer py-2 pl-3 pr-6 rounded-md ${
+              location.pathname === "/bookcategory"
+                ? "bg-blue-500"
+                : "hover:bg-blue-500"
+            } transition-colors duration-300 flex items-center`}
+          >
+            <NavLink to="/bookcategory">
+              <i className="fa-solid fa-book-open"></i>
+              <span className="ml-3">Book Category</span>
+            </NavLink>
+          </div>
+          <div
+            className={`mb-2 cursor-pointer py-2 pl-3 pr-6 rounded-md ${
+              location.pathname === "/allbooks"
+                ? "bg-blue-500"
+                : "hover:bg-blue-500"
+            } transition-colors duration-300 flex items-center`}
+          >
+            <NavLink to="/allbooks">
+              <i className="fa-solid fa-book-open"></i>
+              <span className="ml-3">Books</span>
             </NavLink>
           </div>
 

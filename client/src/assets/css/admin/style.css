@@ -38,8 +38,10 @@
   font-family: "Poppins", sans-serif;
 }
 .boxes {
-  border-radius: 12px;
-  width: calc(100% / 3 - 15px);
-  padding: 35px 0px;
+  border-radius: 7px;
+  width: 18%;
+  color: white;
+  padding: 10px 0px;
   transition: all 0.5s ease;
+  background-color: #191919;
 }
