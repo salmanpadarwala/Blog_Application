@@ -174,89 +174,93 @@ const AllTrashBook = () => {
                 </tr>
               </thead>
               <tbody>
-                {rows.length > 0
-                  ? rows.map((e) => {
-                      let flag = 0;
+                {rows.length > 0 ? (
+                  rows.map((e) => {
+                    let flag = 0;
 
-                      return (
-                        <>
-                          <tr
-                            key={e.id}
-                            className="text-center border-b border-gray-300 group align-top"
-                          >
-                            <td style={{ textAlign: "-webkit-center" }}>
-                              {e.book_thumbnail != "" ? (
-                                <img
-                                  src={`./upload/${e.book_thumbnail}`}
-                                  height="50px"
-                                  width="50px"
-                                  alt="books"
-                                />
-                              ) : (
-                                <p>Not Found</p>
-                              )}
-                            </td>
-                            <td className="pb-3 pt-1">
-                              {e.book_pdf != "" ? (
-                                <img
-                                  src={require(`../../../assets/image/pdf2.webp`)}
-                                  height="50px"
-                                  width="50px"
-                                  alt="book_pdf"
-                                />
-                              ) : (
-                                <p>Not Found</p>
-                              )}
-                            </td>
-                            <td>
-                              {e.book_title}
-                              <p className="text-sm opacity-0 group-hover:opacity-100">
-                                <div className="flex">
-                                  <p
-                                    onClick={() => {
-                                      trashBackBook(e.id);
-                                    }}
-                                  >
-                                    <p className="text-blue-400 cursor-pointer">
-                                      Restore
-                                    </p>
+                    return (
+                      <>
+                        <tr
+                          key={e.id}
+                          className="text-center border-b border-gray-300 group align-top"
+                        >
+                          <td style={{ textAlign: "-webkit-center" }}>
+                            {e.book_thumbnail != "" ? (
+                              <img
+                                src={`./upload/${e.book_thumbnail}`}
+                                height="50px"
+                                width="50px"
+                                alt="books"
+                              />
+                            ) : (
+                              <p>Not Found</p>
+                            )}
+                          </td>
+                          <td className="pb-3 pt-1">
+                            {e.book_pdf != "" ? (
+                              <img
+                                src={require(`../../../assets/image/pdf2.webp`)}
+                                height="50px"
+                                width="50px"
+                                alt="book_pdf"
+                              />
+                            ) : (
+                              <p>Not Found</p>
+                            )}
+                          </td>
+                          <td>
+                            {e.book_title}
+                            <p className="text-sm opacity-0 group-hover:opacity-100">
+                              <div className="flex">
+                                <p
+                                  onClick={() => {
+                                    trashBackBook(e.id);
+                                  }}
+                                >
+                                  <p className="text-blue-400 cursor-pointer">
+                                    Restore
                                   </p>
-                                  <p className="mx-1">|</p>
-                                  <p
-                                    className="text-red-500 cursor-pointer"
-                                    onClick={() => {
-                                      DeleteAlert(e.id);
-                                    }}
-                                  >
-                                    Permenently Delete
-                                  </p>
-                                </div>
-                              </p>
-                            </td>
-                            <td> {e.book_author}</td>
-                            <td>{e.book_description}</td>
-                            <td>
-                              {e.book_isdownload == 0 ? <p>No</p> : <p>Yes</p>}
-                            </td>
+                                </p>
+                                <p className="mx-1">|</p>
+                                <p
+                                  className="text-red-500 cursor-pointer"
+                                  onClick={() => {
+                                    DeleteAlert(e.id);
+                                  }}
+                                >
+                                  Permenently Delete
+                                </p>
+                              </div>
+                            </p>
+                          </td>
+                          <td> {e.book_author}</td>
+                          <td>{e.book_description}</td>
+                          <td>
+                            {e.book_isdownload == 0 ? <p>No</p> : <p>Yes</p>}
+                          </td>
 
-                            <td>
-                              {BookCategory.map((x) => {
-                                if (e.books_category === x.id) {
-                                  flag = 1;
-                                  return x.category_name;
-                                }
-                              })}
-                              {flag === 0 ? "null" : ""}
-                            </td>
-                            <td>
-                              <p>{e.upload_date}</p>
-                              <p>{e.book_publish_time}</p>
-                            </td>
-                          </tr>
-                        </>
-                      );
-                    })
-                  : ""}
+                          <td>
+                            {BookCategory.map((x) => {
+                              if (e.books_category === x.id) {
+                                flag = 1;
+                                return x.category_name;
+                              }
+                            })}
+                            {flag === 0 ? "null" : ""}
+                          </td>
+                          <td>
+                            <p>{e.upload_date}</p>
+                            <p>{e.book_publish_time}</p>
+                          </td>
+                        </tr>
+                      </>
+                    );
+                  })
+                ) : (
+                  <tr>
+                    <td colSpan="6">Empty</td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>

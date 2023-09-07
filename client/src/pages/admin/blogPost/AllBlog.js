@@ -190,22 +190,22 @@ const AllBlog = () => {
             <table className="text-gray-500 w-full">
               <thead className="text-md text-gray-700 bg-gray-100">
                 <tr>
-                  <th scope="col" className="px-4 py-3">
+                  <th className="px-4 py-3">
                     Image
                   </th>
-                  <th scope="col" className="px-4 py-3 cursor-pointer">
+                  <th className="px-4 py-3 cursor-pointer">
                     Blog Title
                   </th>
-                  <th scope="col" className="px-4 py-3">
+                  <th className="px-4 py-3">
                     Blog Author
                   </th>
-                  <th scope="col" className="px-4 py-3">
+                  <th className="px-4 py-3">
                     Blog Category
                   </th>
-                  <th scope="col" className="px-4 py-3">
+                  <th className="px-4 py-3">
                     Blog Tags
                   </th>
-                  <th scope="col" className="px-4 py-3">
+                  <th className="px-4 py-3">
                     Published Date
                   </th>
                 </tr>

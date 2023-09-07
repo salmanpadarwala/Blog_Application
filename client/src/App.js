@@ -6,6 +6,8 @@ import BlogCateRoute from "./routes/admin/BlogCateRoute";
 import BlogPostRoute from "./routes/admin/BlogPostRoute";
 import BookCategoryRoute from "./routes/admin/BookCategoryRoute";
 import BookRoute from "./routes/admin/BookRoute";
+import NameCateRoute from "./routes/admin/NameCateRoute";
+import NameRoute from "./routes/admin/NameRoute";
 
 const App = () => {
   return (
@@ -17,6 +19,8 @@ const App = () => {
       <BlogPostRoute />
       <BookCategoryRoute />
       <BookRoute />
+      <NameCateRoute />
+      <NameRoute />
     </>
   );
 };

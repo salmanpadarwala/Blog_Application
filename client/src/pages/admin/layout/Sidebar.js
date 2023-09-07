@@ -93,6 +93,32 @@ const Sidebar = () => {
             </NavLink>
           </div>
 
+          <div
+            className={`mb-2 cursor-pointer py-2 pl-3 pr-6 rounded-md ${
+              location.pathname === "/addnamecategory"
+                ? "bg-blue-500"
+                : "hover:bg-blue-500"
+            } transition-colors duration-300 flex items-center`}
+          >
+            <NavLink to="/addnamecategory">
+              <i className="fa-solid fa-user"></i>
+              <span className="ml-3">Name Category</span>
+            </NavLink>
+          </div>
+
+          <div
+            className={`mb-2 cursor-pointer py-2 pl-3 pr-6 rounded-md ${
+              location.pathname === "/allnames"
+                ? "bg-blue-500"
+                : "hover:bg-blue-500"
+            } transition-colors duration-300 flex items-center`}
+          >
+            <NavLink to="/allnames">
+              <i className="fa-solid fa-user"></i>
+              <span className="ml-3">Names</span>
+            </NavLink>
+          </div>
+
           <div className="mb-2 cursor-pointer py-2 pl-3 pr-6 rounded-md hover:bg-blue-500 border-2 border-blue-500 transition-colors duration-300 flex items-center">
             <button type="button" onClick={handleLogoutClick}>
               <i className="fa-solid fa-arrow-right-from-bracket"></i>
