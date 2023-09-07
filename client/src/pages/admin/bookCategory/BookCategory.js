@@ -1,14 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DeleteModal from "../layout/DeleteModal";
 import PORT from "../../../assets/constant/Url";
 
 const BookCategory = () => {
-  const navigate = useNavigate();
-  // fields of table
   const [categoryName, setCategoryName] = useState("");
   const [categoryDesc, setCategoryDesc] = useState("");
   const [subCategory, setSubCategory] = useState(null);
@@ -43,13 +40,11 @@ const BookCategory = () => {
     }
   };
 
-  // get blog category data
-
+  // get book category data
   const getData = async () => {
     try {
       const res = await axios.get(`${PORT}getbookcategory`);
       setbooklogCategory(res.data);
-      console.log(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -59,8 +54,7 @@ const BookCategory = () => {
     getData();
   }, []);
 
-  // save the blog category data
-
+  // save the book category data
   const savedata = async (e) => {
     e.preventDefault();
     const team = {
@@ -68,12 +62,10 @@ const BookCategory = () => {
       categoryDesc: categoryDesc,
       subCategory: subCategory,
     };
-    console.log(team);
     try {
       await axios
         .post(`${PORT}addbookcategory`, team)
         .then((res) => {
-          console.log(res);
           toast.success(" Category Added Successfully");
           getData();
           setCategoryName("");
@@ -88,7 +80,7 @@ const BookCategory = () => {
     }
   };
 
-  //DELETE BRAND DATA
+  //DELETE BOKK CATEGORY DATA
   const openDeleteModal = (brandId) => {
     setSelectedBlogId(brandId);
     setIsDeleteModalOpen(true);
@@ -109,7 +101,7 @@ const BookCategory = () => {
       toast.success("Category Delete Successfully");
       getData();
     } catch (error) {
-      window.alert(error);
+      toast.error(error);
     }
   };
 
@@ -134,6 +126,10 @@ const BookCategory = () => {
               type="text"
               placeholder="Search Book Category..."
               className="border border-gray-300 w-full rounded-md px-3 py-2 pr-10 focus:outline-none"
+              value={searchFilter}
+              onChange={(e) => {
+                setSearchFilter(e.target.value);
+              }}
             />
             <i className="fa-solid fa-search text-gray-600 absolute right-3 top-1/2 transform -translate-y-1/2"></i>
           </div>
@@ -154,7 +150,11 @@ const BookCategory = () => {
                   <th scope="col" className="px-4 py-3">
                     Id
                   </th>
-                  <th scope="col" className="px-4 py-3 cursor-pointer">
+                  <th
+                    scope="col"
+                    className="px-4 py-3 cursor-pointer"
+                    onClick={() => sorting("category_name")}
+                  >
                     Category<i className="fa-solid fa-filter"></i>
                   </th>
                   <th scope="col" className="px-4 py-3">
@@ -220,7 +220,6 @@ const BookCategory = () => {
             </table>
           </div>
         </div>
-
         <div className="w-5/12 absolute top-8 right-0 mt-4 flex justify-center items-center">
           <div className="w-9/12 shadow-lg text-gray-500 px-3 py-2">
             <form method="post">

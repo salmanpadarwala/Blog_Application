@@ -39,9 +39,13 @@
 }
 .boxes {
   border-radius: 7px;
-  width: 18%;
+  width: 30%;
   color: white;
-  padding: 10px 0px;
+  padding: 30px 0px;
   transition: all 0.5s ease;
   background-color: #191919;
+  margin-bottom: 25px;
+}
+.boxe1 {
+  width: 48%;
 }

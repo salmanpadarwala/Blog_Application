@@ -1,24 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { useNavigate, useParams, NavLink } from "react-router-dom";
 import axios from "axios";
-import { NavLink, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PORT from "../../../assets/constant/Url";
 
-const AddBooks = () => {
+const EditBook = () => {
+  const { id } = useParams("");
   const navigate = useNavigate();
-  // Store Input Date in this State
   const [bookTitle, setBookTitle] = useState("");
   const [bookAuthor, setBookAuthor] = useState("");
   const [bookDesc, setBookDesc] = useState("");
   const [bookThumnail, setBookThumnail] = useState("");
   const [bookPDF, setBookPDF] = useState("");
-  const [bookIsDownloadable, setBookIsDownloadable] = useState(0);
-  const [bookCategory, setBookCategory] = useState(null);
-
-  // const [blogStatus, setBlogStatus] = useState(1);
-
-  // Store the Category Data in this State
+  const [bookIsDownloadable, setBookIsDownloadable] = useState(1);
+  const [previewimg, setPreviewimg] = useState("");
+  const [previewPdf, setPreviewPdf] = useState("");
+  const [bookCategory, setBookCategory] = useState(-1);
   const [category, setCategory] = useState([]);
 
   // Get Category Data
@@ -31,8 +29,27 @@ const AddBooks = () => {
     }
   };
 
+  //get Book detail
+  const getbookDetail = async () => {
+    try {
+      const res = await axios.get(`${PORT}getbookdetail/${id}`);
+      setBookTitle(res.data[0].book_title);
+      setBookDesc(res.data[0].book_description);
+      setBookAuthor(res.data[0].book_author);
+      setBookIsDownloadable(res.data[0].book_isdownload);
+      setBookPDF(res.data[0].book_pdf);
+      setPreviewPdf(res.data[0].book_pdf);
+      setBookThumnail(res.data[0].book_thumbnail);
+      setPreviewimg(res.data[0].book_thumbnail);
+      setBookCategory(res.data[0].books_category);
+    } catch (error) {
+      toast.error(error);
+    }
+  };
+
   useEffect(() => {
     getData();
+    getbookDetail();
   }, []);
 
   // book thumnail
@@ -71,9 +88,8 @@ const AddBooks = () => {
   const savedata = async (e) => {
     e.preventDefault();
     try {
-      if (bookCategory == null) {
-        toast.error("Select Category");
-        return;
+      if (bookCategory == -1) {
+        return toast.error("Select Category");
       }
       const formdata = new FormData();
       formdata.append("bookTitle", bookTitle);
@@ -84,36 +100,23 @@ const AddBooks = () => {
       formdata.append("bookIsDownloadable", bookIsDownloadable);
       formdata.append("bookCategory", bookCategory);
       axios
-        .post(`${PORT}addbook`, formdata, {
+        .patch(`${PORT}editbook/${id}`, formdata, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
         })
         .then((data) => {
-          toast.success("Book Added");
+          toast.success("Book Updated");
           navigate("/allbooks", { replace: true });
         })
         .catch((e) => {
-          toast.error("Book Upload Failed");
+          toast.error("Book Update Failed");
         });
     } catch (e) {
       console.log(e);
     }
   };
 
-  const [open, setOpen] = React.useState(false);
-
-  const descriptionElementRef = React.useRef(null);
-  useEffect(() => {
-    if (open) {
-      const { current: descriptionElement } = descriptionElementRef;
-      if (descriptionElement !== null) {
-        descriptionElement.focus();
-      }
-    }
-  }, [open]);
-
-  // readio button
   const handleRadioChange = (event) => {
     setBookIsDownloadable(event.target.value);
   };
@@ -144,13 +147,11 @@ const AddBooks = () => {
           </div>
         </div>
       </section>
-
       <div className="relative dashboard px-5 mt-8">
         <div className="flex align-center">
           <i className="fa-regular fa-clock py-1 px-2 relative bg-blue-500 rounded-md cursor-pointer text-white text-2xl"></i>
-          <span className="font-bold ml-3 text-2xl pt-1">Add Books</span>
+          <span className="font-bold ml-3 text-2xl pt-1">Edit Book</span>
         </div>
-
         <div className="flex justify-between">
           <div className="mt-4 shadow-lg h-min p-4" style={{ width: "47%" }}>
             <div className="grid gap-y-4">
@@ -212,43 +213,44 @@ const AddBooks = () => {
                 />
               </div>
               <div>
-                <label className="text-lg mb-2 block">Book Download ?</label>
-                <div className="flex items-center">
-                  <input
-                    type="radio"
-                    id="bookDownloadYes"
-                    name="bookDownload"
-                    value={1}
-                    checked={bookIsDownloadable === 1}
-                    onChange={handleRadioChange}
-                    className="mr-2 w-3 h-3 appearance-none bg-white border border-gray-400 rounded-md focus:bg-blue-600"
-                  />
-                  <label
-                    htmlFor="bookDownloadYes"
-                    className="text-sm mr-4 cursor-pointer"
-                  >
-                    Yes
-                  </label>
-                  <input
-                    type="radio"
-                    id="bookDownloadNo"
-                    name="bookDownload"
-                    value={0}
-                    checked={bookIsDownloadable === 0}
-                    onChange={handleRadioChange}
-                    className="mr-2 w-3 h-3 appearance-none bg-white border border-gray-400 rounded-md focus:bg-blue-600"
-                  />
-                  <label
-                    htmlFor="bookDownloadNo"
-                    className="text-sm cursor-pointer"
-                  >
-                    No
-                  </label>
+                <div
+                  id="demo-radio-buttons-group-label"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Book Download :-
+                </div>
+                <div className="flex">
+                  <div className="ml-2">
+                    <input
+                      id="downloadYes"
+                      type="radio"
+                      value={1}
+                      checked={bookIsDownloadable == 1}
+                      onChange={handleRadioChange}
+                      className="mt-2"
+                    />
+                    <label htmlFor="downloadYes" className="ml-1 text-gray-700">
+                      Yes
+                    </label>
+                  </div>
+                  <div className="ml-4">
+                    <input
+                      id="downloadNo"
+                      type="radio"
+                      value={0}
+                      checked={bookIsDownloadable == 0}
+                      onChange={handleRadioChange}
+                      className="mt-2"
+                    />
+                    <label htmlFor="downloadNo" className="ml-1 text-gray-700">
+                      No
+                    </label>
+                  </div>
                 </div>
               </div>
+              <div className="flex items-center"></div>
             </div>
           </div>
-
           <div className="mt-4 shadow-lg h-min p-4" style={{ width: "47%" }}>
             <div className="grid gap-y-4">
               <div>
@@ -267,7 +269,7 @@ const AddBooks = () => {
                     setBookCategory(e.target.value);
                   }}
                 >
-                  <option selected value={null}>
+                  <option selected value={-1}>
                     Select Book Category
                   </option>
                   {category.map((e) => {
@@ -284,6 +286,19 @@ const AddBooks = () => {
                   </div>
                 </NavLink>
               </div>
+              {previewimg != "" ? (
+                <div className="mb-4">
+                  <label className="px-3">Old Thumnail</label>
+                  <img
+                    src={`../upload/${previewimg}`}
+                    height="150px"
+                    width="150px"
+                    alt="Book_old"
+                  />
+                </div>
+              ) : (
+                <p>No Thumnail Uploaded</p>
+              )}
               <div>
                 <label
                   htmlFor="bookimg"
@@ -296,10 +311,24 @@ const AddBooks = () => {
                   className="border border-gray-300 text-sm rounded-lg block w-full p-2.5"
                   placeholder="Book Thumnail"
                   name="bookthumnail"
-                  onChange={handlethumnail}
                   id="bookimg"
+                  onChange={handlethumnail}
                 />
               </div>
+              {previewPdf != "" ? (
+                <div className="mt-2">
+                  <label className="px-3">Old PDF</label>
+                  <img
+                    src={require(`../../../assets/image/pdf2.webp`)}
+                    height="100px"
+                    width="150px"
+                    alt="Book_pdf"
+                  />
+                  <p>{previewPdf}</p>
+                </div>
+              ) : (
+                <p>No PDF Uploaded</p>
+              )}
               <div>
                 <label
                   htmlFor="pdfimg"
@@ -333,4 +362,4 @@ const AddBooks = () => {
   );
 };
 
-export default AddBooks;
+export default EditBook;

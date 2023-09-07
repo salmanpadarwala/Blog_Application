@@ -1,9 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import PORT from "../../../assets/constant/Url";
+import DeleteModal from "../layout/DeleteModal";
 
 const AllBooks = () => {
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [selectedBlogId, setSelectedBlogId] = useState(null);
   const [categoryFilter, setCategoryFilter] = useState("");
   const [BookCategory, setBookCategory] = useState([]);
   const [Books, setBooks] = useState([]);
@@ -25,7 +28,6 @@ const AllBooks = () => {
     try {
       const res = await axios.get(`${PORT}getbookcategory`);
       setBookCategory(res.data);
-      console.log(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -36,6 +38,21 @@ const AllBooks = () => {
     getData();
   }, []);
 
+  //DELETE BOOK DATA
+  const openDeleteModal = (id) => {
+    setSelectedBlogId(id);
+    setIsDeleteModalOpen(true);
+  };
+  const closeDeleteModal = () => {
+    setSelectedBlogId(null);
+    setIsDeleteModalOpen(false);
+  };
+  const deleteBookPost = () => {
+    if (selectedBlogId) {
+      trashBooks(selectedBlogId);
+      closeDeleteModal();
+    }
+  };
   const trashBooks = async (id) => {
     try {
       const res = await axios.patch(`${PORT}trashbook/${id}`);
@@ -54,8 +71,6 @@ const AllBooks = () => {
       const bookdesc = item.book_description
         .toLowerCase()
         .startsWith(searchTerm);
-
-      // Apply category filter
       const categoryMatches =
         categoryFilter === "" || item.books_category == categoryFilter;
 
@@ -69,14 +84,11 @@ const AllBooks = () => {
   }, [searchFilter, categoryFilter, Books]);
 
   const itemPerPage = 10;
-
   const numberOfPage = Math.ceil(filterBooks.length / itemPerPage);
   const pageIndex = Array.from({ length: numberOfPage }, (_, idx) => idx + 1);
-
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-
   const rows = filterBooks.slice(
     currentPage * itemPerPage,
     (currentPage + 1) * itemPerPage
@@ -158,7 +170,7 @@ const AllBooks = () => {
               </thead>
               <tbody>
                 {rows.length > 0
-                  ? rows.map((e, idx) => {
+                  ? rows.map((e) => {
                       let flag = 0;
 
                       return (
@@ -167,37 +179,42 @@ const AllBooks = () => {
                             key={e.id}
                             className="text-center border-b border-gray-300 group align-top"
                           >
-                            <td className="pb-3">
+                            <td style={{ textAlign: "-webkit-center" }}>
                               {e.book_thumbnail != "" ? (
-                                // <img
-                                //   src={`./uploads/Books/PDF/${e.book_thumbnail}`}
-                                //   style={{ height: "50px", width: "50px" }}
-                                // />
-                                "fvfd"
+                                <img
+                                  src={`./upload/${e.book_thumbnail}`}
+                                  height="50px"
+                                  width="50px"
+                                />
+                              ) : (
+                                <p>Not Found</p>
+                              )}
+                            </td>
+                            <td className="pb-3 pt-1">
+                              {e.book_pdf != "" ? (
+                                <img
+                                  src={require(`../../../assets/image/pdf.png`)}
+                                  style={{ height: "50px", width: "50px" }}
+                                />
                               ) : (
                                 <p>Not Found</p>
                               )}
                             </td>
                             <td>
-                              {e.book_pdf != "" ? "tyhy" : <p>Not Found</p>}
-                            </td>
-                            <td>
                               {e.book_title}
-                              <p
-                                className="p-0 m-0 tred "
-                                style={{ fontSize: "14px" }}
-                              >
+                              <p className="text-sm opacity-0 group-hover:opacity-100">
                                 <div className="flex">
-                                  <Link to={`/editbook/${e.id}`}>
-                                    <p>&nbsp;Edit | </p>
-                                  </Link>
+                                  <NavLink to={`/editbook/${e.id}`}>
+                                    <p className="text-blue-400">Edit</p>
+                                  </NavLink>
+                                  <p className="mx-1">|</p>
                                   <p
-                                    className="text-red-500"
+                                    className="text-red-500 cursor-pointer"
                                     onClick={() => {
-                                      trashBooks(e.id);
+                                      openDeleteModal(e.id);
                                     }}
                                   >
-                                    &nbsp;Trash
+                                    Trash
                                   </p>
                                 </div>
                               </p>
@@ -230,7 +247,42 @@ const AllBooks = () => {
             </table>
           </div>
         </div>
+
+        <div className="flex justify-end mt-4">
+          <button
+            disabled={currentPage <= 0}
+            onClick={() => handlePageChange(currentPage - 1)}
+            className="bg-blue-500 text-white px-2 py-1 rounded cursor-pointer"
+          >
+            <i className="fa-solid fa-arrow-left"></i>
+          </button>
+          {pageIndex.map((page) => (
+            <button
+              key={page}
+              onClick={() => handlePageChange(page - 1)}
+              className={`px-3 py-1 mx-1 text-gray-600 rounded-md ${
+                currentPage === page - 1
+                  ? "bg-blue-500 text-white hover:bg-blue-600"
+                  : "bg-gray-500 text-white hover:bg-gray-600"
+              }`}
+            >
+              {page}
+            </button>
+          ))}
+          <button
+            disabled={currentPage >= numberOfPage - 1}
+            onClick={() => handlePageChange(currentPage + 1)}
+            className="bg-blue-500 text-white px-2 py-1 rounded cursor-pointer"
+          >
+            <i className="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
       </div>
+      <DeleteModal
+        isOpen={isDeleteModalOpen}
+        onClose={closeDeleteModal}
+        onDelete={deleteBookPost}
+      />
     </>
   );
 };
