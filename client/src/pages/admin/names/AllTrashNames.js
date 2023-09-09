@@ -105,7 +105,6 @@ const AllTrashNames = () => {
 
   return (
     <>
-      <div className="container-scroller">
         <ToastContainer
           position="top-right"
           autoClose={5000}
@@ -256,7 +255,6 @@ const AllTrashNames = () => {
             </button>
           </div>
         </div>
-      </div>
     </>
   );
 };

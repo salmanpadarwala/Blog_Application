@@ -48,6 +48,7 @@ router.post(
   Books.addBooks
 );
 router.route("/getbooks").get(Books.getbooks);
+router.route("/getCateFilter/:id").get(Books.getCateFilter);
 router.route("/gettrashbooks").get(Books.gettrashbooks);
 router.route("/getbookdetail/:id").get(Books.getbookdetail);
 router.route("/trashbook/:id").patch(Books.trashbooks);

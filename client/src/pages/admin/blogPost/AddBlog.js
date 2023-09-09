@@ -259,7 +259,7 @@ const AddBlog = () => {
                   htmlFor="blog_title"
                   className="block mb-2 text-sm font-medium"
                 >
-                  Blog Name:
+                  Blog Title:
                 </label>
                 <input
                   type="text"
