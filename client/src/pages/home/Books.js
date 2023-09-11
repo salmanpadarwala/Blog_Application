@@ -28,7 +28,7 @@ const Books = () => {
     try {
       const res = await axios.get(`${PORT}getCateFilter/${id}`);
       setCateFilter(res.data);
-      setSelectedTab(id); // Update the selectedTab state
+      setSelectedTab(id);
     } catch (err) {
       console.log(err);
     }
@@ -48,13 +48,13 @@ const Books = () => {
             <div className="flex flex-wrap">
               <div className="w-full">
                 <ul
-                  className="flex my-3 list-none flex-wrap flex-row rounded tabs-section"
+                  className="flex mt-6 mb-3 list-none flex-wrap flex-row rounded"
                   role="tablist"
                 >
                   {booklogCategory.length > 0 ? (
                     booklogCategory.map((e, idx) => (
                       <li
-                        className="flex-auto text-center me-2 last:me-0 lg:mb-0 mb-2 tab-list"
+                        className="text-center me-2 last:me-0 lg:mb-0 mb-2 tab-list"
                         key={idx}
                       >
                         <NavLink
@@ -93,7 +93,7 @@ const Books = () => {
                                 alt={books.book_title}
                               />
                             </div>
-                            <div className="text-center px-2 overflow-hidden font-bold text-md leading-5 tracking-wide">
+                            <div className="book_title">
                               <p>{books.book_title}</p>
                             </div>
                           </div>

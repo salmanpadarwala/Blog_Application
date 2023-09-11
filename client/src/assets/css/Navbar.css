@@ -12,6 +12,7 @@
   background-repeat: repeat-x;
   background-position: left, right;
   justify-content: space-around;
+  font-family: noto;
 }
 .header-topbar-sections {
   display: flex;
@@ -40,19 +41,20 @@
   font-size: 14px;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
-
+.navbar-menu {
+  font-family: noto;
+}
 .navbar-menu li a:hover {
   color: var(--primary-color);
 }
-
 .nav-link {
   position: relative;
   padding-bottom: 5px;
   transition: color 0.3s ease;
   margin-left: 20px;
   color: var(--secondary-color);
+  font-size: 14px;
 }
-
 .nav-link::before {
   content: "";
   position: absolute;
@@ -68,11 +70,9 @@
   width: 100%;
   left: 0;
 }
-
 .navbar-menu .active {
   color: var(--primary-color);
 }
-
 .navbar-menu::before .active {
   content: "";
   position: absolute;
@@ -83,18 +83,18 @@
   background-color: var(--primary-color);
   transition: width 0.3s ease, left 0.3s ease;
 }
-
 #navbar-button {
   background-color: var(--primary-color);
   color: white;
   position: relative;
   z-index: 1;
   overflow: hidden;
-  padding: 14.5px 35px;
+  padding: 5px 35px;
   font-size: 14px;
   font-weight: 500;
   border-radius: 40px;
   transition: all 0.15s linear;
+  font-family: noto;
 }
 #navbar-button:hover {
   background-color: var(--secondary-color);

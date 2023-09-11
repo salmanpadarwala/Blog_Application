@@ -1,3 +1,7 @@
+@font-face {
+  font-family: "Poppins";
+  src: url("../../font/Poppins-Medium.ttf") format("truetype");
+}
 /* ADMIN LOGIN COMPONENT CSS */
 .box {
   width: 450px;
@@ -26,16 +30,14 @@
   background: #2ecc71;
 }
 /* DASHBOARD COMPONENT CSS */
-/* ===== Google Font Import - Poppins ===== */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap");
 .sidebar {
   width: 250px;
-  font-family: "Poppins", sans-serif;
+  font-family: Poppins;
 }
 .dashboard {
   left: 250px;
   width: calc(100% - 250px);
-  font-family: "Poppins", sans-serif;
+  font-family: Poppins;
 }
 .boxes {
   border-radius: 7px;

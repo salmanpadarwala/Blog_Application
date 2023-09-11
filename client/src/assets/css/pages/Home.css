@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "noto";
+  src: url("../../font/Noto_Nastaliq_Urdu/static/NotoNastaliqUrdu-Regular.ttf")
+    format("truetype");
+}
 /* ISLAMIC FOUR PILLER SECTION START */
 .four-piller-outside {
   border: 1px solid #d1ad3c;
@@ -24,16 +29,20 @@
   font-size: 25px;
   font-weight: 700;
   text-align: center;
+  font-family: noto;
 }
 .four-piller-discription {
   width: 95%;
-  margin: 0 auto;
+  margin: 9px 0px 0px 0px;
   text-align: center;
+  line-height: 1.7rem;
+  font-family: noto;
 }
 
 /* HERO BANNER CSS */
 .hero_banner {
   background-image: url("../../image/banner-img-1.webp");
+  font-family: noto;
 }
 .section_title {
   font-size: 20px;
@@ -42,6 +51,7 @@
   padding-bottom: 4px;
   border-bottom: 3px solid var(--primary-color);
   text-align: center;
+  font-family: noto;
 }
 
 /* BOOKS COMPONENTS CSS */
@@ -54,13 +64,15 @@
   background-color: white;
   border: 1px solid rgb(218, 215, 215);
   border-radius: 5px;
+  font-family: noto;
 }
 .islamic-books {
   width: 22%;
-  height: 270px;
+  height: 330px;
   background-color: #f7f4f4;
   border-radius: 5px;
   cursor: pointer;
+  font-family: noto;
 }
 
 .islamic-book-image {
@@ -76,9 +88,17 @@
 
 .islamic-books-main {
   border-radius: 10px;
-  max-height: 90%;
+  height: 80%;
   overflow: hidden;
-  box-shadow: 0 4px 2px -2px var(--primary-color);
+}
+.book_title {
+  height: 20% !important;
+  text-align: center;
+  font-weight: bold;
+  padding: 4px 3px 2px 3px;
+  overflow: hidden;
+  font-size: 15px;
+  letter-spacing: 1.3px;
 }
 
 @media screen and (max-width: 1000px) {
@@ -100,12 +120,15 @@
   .islamic-books {
     width: calc(97% - 10px);
     margin-bottom: 20px;
+    padding-bottom: 10px;
   }
 }
 
 /* NEWS COMPONENTS CSS */
 .three-news {
   width: 22%;
+  height: 320px;
+  font-family: noto;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   position: relative;
   border-radius: 6px;
@@ -115,15 +138,28 @@
 .news-category-name {
   text-transform: uppercase;
   border-radius: 3px;
-  background-color: #949ee5;
-  padding: 1px 10px;
+  z-index: 1;
+  background-color: var(--primary-color);
+  padding: 1px 10px 6px 10px;
   color: white;
   font-weight: 700;
   font-size: 10px;
   position: absolute;
   top: 4px;
   left: 4px;
-  font-size: 15px;
+  font-size: 13px;
+}
+.news_image_main {
+  height: 50%;
+  overflow: hidden;
+}
+.news_title {
+  height: 40%;
+  overflow: hidden;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 1.9rem;
+  padding: 2px 5px 2px 3px;
 }
 @media screen and (max-width: 1000px) {
   .three-news {

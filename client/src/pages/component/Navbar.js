@@ -42,8 +42,8 @@ const Navbar = () => {
       </div>
 
       <header className="sticky top-0 z-10">
-        <nav className="w-full bg-white shadow-md px-10">
-          <div className="lg:flex block items-center lg:px-6 lg:py-4 py-2 justify-between">
+        <nav className="w-full bg-white shadow-md lg:px-10 px-4">
+          <div className="lg:flex block items-center lg:py-4 py-2 justify-between">
             <div>
               <NavLink to="/">
                 <img src={Logo} alt="logo" width="144px" height="auto" />

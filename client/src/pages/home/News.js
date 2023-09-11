@@ -13,7 +13,7 @@ const News = () => {
 
   const getPosts = async () => {
     try {
-      const res = await axios.get(`${PORT}getpublishedblogpost`);
+      const res = await axios.get(`${PORT}getblogpostwithlimit`);
       setBlogPost(res.data);
     } catch (err) {
       console.log(err);
@@ -44,7 +44,7 @@ const News = () => {
     <>
       <div className="w-full bg-gray-100">
         <div className="w-4/5 mx-auto flex flex-wrap mb-10 py-6">
-          <div className="w-full">
+          <div className="w-full mb-3">
             <div>
               <span className="section_title">خبریں:-</span>
             </div>
@@ -66,19 +66,19 @@ const News = () => {
                         })}
                         {flag === 0 ? "null" : ""}
                       </span>
-                      <div className="max-h-1/2 overflow-hidden">
+                      <div className="news_image_main">
                         <img
                           src={`./upload/${e.blog_image}`}
-                          className="rounded-sm"
+                          className="islamic-book-image"
                           width="100%"
                           height="100%"
                           alt="news-img"
                         />
                       </div>
-                      <div className="px-2 pt-3 pb-4 font-bold text-lg leading-5 tracking-wide">
+                      <div className="news_title">
                         <p>{e.blog_title}</p>
                       </div>
-                      <div className="px-2 text-blue-400 text-sm">
+                      <div className="px-2 text-blue-400 text-sm h-auto">
                         <span className="hover:underline">
                           اشاعت کی تاریخ: {formatDate(e.blog_publish_date)}
                         </span>

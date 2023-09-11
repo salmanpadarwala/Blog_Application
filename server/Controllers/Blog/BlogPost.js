@@ -268,11 +268,29 @@ router.get("/getdraftblogpost", (req, res) => {
   });
 });
 
-// **** Get Published Blog Post ********
+// **** Get Published Blog Post ********//
 
 router.get("/getpublishedblogpost", (req, res) => {
   const q =
     "SELECT *, DATE_FORMAT(DATE(blog_publish_date), '%d-%m-%Y') AS blog_publish_date FROM bg_blog_post where  blog_status = ? and blog_delete_status = ? order by id desc ";
+
+  const flag = true;
+  const remove = true;
+
+  conn.query(q, [flag, remove], (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(data);
+    }
+  });
+});
+
+// **** Get Published Blog Post ********//
+
+router.get("/getblogpostwithlimit", (req, res) => {
+  const q =
+    "SELECT *, DATE_FORMAT(DATE(blog_publish_date), '%d-%m-%Y') AS blog_publish_date FROM bg_blog_post where  blog_status = ? and blog_delete_status = ? order by id desc limit 12";
 
   const flag = true;
   const remove = true;
