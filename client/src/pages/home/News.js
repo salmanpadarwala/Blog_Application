@@ -51,7 +51,7 @@ const News = () => {
           </div>
 
           <div className="w-full">
-            <div className="flex flex-wrap bg-white shadow-lg rounded justify-around mt-5 px-3 py-6">
+            <div className="flex flex-wrap bg-white shadow-lg rounded justify-around mt-5 px-3 pt-6">
               {blogPost.length > 0 ? (
                 blogPost.map((e, idx) => {
                   let flag = 0;
@@ -87,7 +87,7 @@ const News = () => {
                   );
                 })
               ) : (
-                <p className="font-bold text-xl">خبریں دستیاب نہیں ہیں۔</p>
+                <p className="not_avial_text">خبریں دستیاب نہیں ہیں۔</p>
               )}
             </div>
           </div>

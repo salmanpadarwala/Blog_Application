@@ -12,7 +12,7 @@ const Navbar = () => {
           <div>
             <NavLink to="tel:7383294925">
               <i className="fa-solid fa-phone me-2"></i>
-              <span>فون: 7383294925</span>
+              <span>فون: 99742 41074</span>
             </NavLink>
           </div>
           <div>
@@ -70,10 +70,19 @@ const Navbar = () => {
                 </NavLink>
               </li>
             </ul>
-            <div className="lg:block hidden">
-              <NavLink to="/" id="navbar-button">
-                دورہ کرنا چاہتے ہے؟
-              </NavLink>
+            <div>
+              <div className="pt-2 relative mx-auto text-gray-600">
+                <input
+                  className="search-input focus:outline-none"
+                  type="search"
+                  name="search"
+                  placeholder="یہاں تلاش کریں..."
+                />
+                <button
+                  type="button"
+                  className="absolute right-0 top-0 mt-5 mr-4"
+                ></button>
+              </div>
             </div>
             <div className="toggle-btn">
               <button

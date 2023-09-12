@@ -195,8 +195,6 @@ const AddBlog = () => {
 
       if (isAvailable) {
         incrementSlug(blogSlug);
-      } else {
-        toast.success("Slug is not available");
       }
     } catch (error) {
       console.error("Error checking slug availability:", error);
@@ -464,7 +462,7 @@ const AddBlog = () => {
                       <div className="w-10/12">{tags}</div>
                       <div className="w-2/12 text-right">
                         <i
-                          class="fa-solid fa-xmark border-2 border-black w-5 h-5 rounded-full text-center cursor-pointer"
+                          className="fa-solid fa-xmark border-2 border-black w-5 h-5 rounded-full text-center cursor-pointer"
                           onClick={() => {
                             RemoveTags(index);
                           }}
@@ -476,14 +474,14 @@ const AddBlog = () => {
               </div>
               <div>
                 <label
-                  htmlFor="blog_slog"
+                  htmlFor="blog_slug"
                   className="block mb-2 text-sm font-medium"
                 >
-                  Blog Slog:
+                  Blog slug:
                 </label>
                 <input
-                  id="blog_slog"
-                  placeholder="Enter Blog Slog..."
+                  id="blog_slug"
+                  placeholder="Enter Blog slug..."
                   className="border border-gray-300 text-sm rounded-lg block w-full p-2.5"
                   value={blogSlug}
                   onChange={(e) => {
