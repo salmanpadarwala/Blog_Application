@@ -73,7 +73,7 @@ const Navbar = () => {
             <div>
               <div className="pt-2 relative mx-auto text-gray-600">
                 <input
-                  className="border-2 border-gray-300 bg-white h-10 w-full px-2 rounded-lg text-sm"
+                  className="search-input focus:outline-none"
                   type="search"
                   name="search"
                   placeholder="یہاں تلاش کریں..."

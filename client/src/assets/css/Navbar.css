@@ -99,6 +99,12 @@
 #navbar-button:hover {
   background-color: var(--secondary-color);
 }
+.search-input {
+  border-bottom: 2px solid var(--primary-color);
+  height: 37px;
+  padding: 0px 5px;
+  font-size: 15px;
+}
 .toggle-btn {
   display: none;
   position: absolute;
@@ -133,4 +139,36 @@
 
 input::placeholder {
   font-family: noto;
+}
+
+/* FOOTER SECTION START */
+.main-footer {
+  background-color: var(--primary-color);
+  position: relative;
+  margin-top: 40px;
+}
+.footer-title {
+  margin-bottom: 40px;
+  font-size: 30px;
+  font-family: noto;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+.footer-description {
+  color: rgb(30, 29, 29);
+  font-family: noto;
+  margin-bottom: 30px;
+  line-height: 2.3rem;
+}
+.footer-subscribe-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  background-color: black;
+  padding: 0 18px;
+  letter-spacing: 0.025em;
+  border-radius: 5px;
+  color: white;
 }
