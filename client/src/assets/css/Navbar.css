@@ -130,3 +130,7 @@
     padding: 6px;
   }
 }
+
+input::placeholder {
+  font-family: noto;
+}

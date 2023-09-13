@@ -4,7 +4,6 @@ import Navbar from "../component/Navbar";
 import HeroSection from "./HeroSection";
 import Blogs from "./Books";
 import News from "./News";
-import Footer from "../component/Footer";
 import "../../assets/css/pages/Home.css";
 
 const index = () => {
@@ -15,7 +14,6 @@ const index = () => {
       <Categories />
       <Blogs />
       <News />
-      <Footer />
     </>
   );
 };

@@ -14,7 +14,7 @@ const DeleteModal = ({ isOpen, onClose, onDelete }) => {
         </p>
         <div className="mt-4 relative justify-end">
           <button onClick={onClose} className="absolute -right-2 -top-24">
-            <i className="fa-solid fa-xmark text-xl text-gray-500 border-2 px-2 border-gray-300 rounded"></i>
+            <i className="fa-solid fa-xmark text-xl text-gray-500 "></i>
           </button>
           <button
             onClick={onDelete}

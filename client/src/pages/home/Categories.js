@@ -17,7 +17,7 @@ const Categories = () => {
               ></img>
             </div>
           </div>
-          <p className="four-piller-names">صلاح</p>
+          <p className="four-piller-names">اسلامی مضامین</p>
           <p className="four-piller-discription">
             عرض جمعت منتصف تم, تكاليف الأرواح الا كل. ما لان وحتى الثالث.
           </p>
@@ -32,7 +32,7 @@ const Categories = () => {
               ></img>
             </div>
           </div>
-          <p className="four-piller-names">صلاح</p>
+          <p className="four-piller-names">اسلامی کتابیں</p>
           <p className="four-piller-discription">
             عرض جمعت منتصف تم, تكاليف الأرواح الا كل. ما لان وحتى الثالث.
           </p>
@@ -47,7 +47,7 @@ const Categories = () => {
               ></img>
             </div>
           </div>
-          <p className="four-piller-names">صلاح</p>
+          <p className="four-piller-names">اسلامی نام</p>
           <p className="four-piller-discription">
             عرض جمعت منتصف تم, تكاليف الأرواح الا كل. ما لان وحتى الثالث.
           </p>

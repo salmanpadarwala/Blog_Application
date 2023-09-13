@@ -99,7 +99,7 @@ const Books = () => {
                           </div>
                         ))
                       ) : (
-                        <div className="font-bold text-xl">
+                        <div className="not_avial_text">
                           کتابیں دستیاب نہیں ہیں۔
                         </div>
                       )}

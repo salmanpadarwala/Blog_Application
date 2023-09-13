@@ -298,7 +298,6 @@ const EditBlog = () => {
                   placeholder="Enter Blog Title..."
                   value={blogTitle}
                   onChange={(e) => {
-                    console.log(blogTitle);
                     setBlogTitle(e.target.value);
                   }}
                   required
@@ -509,14 +508,14 @@ const EditBlog = () => {
               </div>
               <div>
                 <label
-                  htmlFor="blog_slog"
+                  htmlFor="blog_slug"
                   className="block mb-2 text-sm font-medium"
                 >
-                  Blog Slog:
+                  Blog slug:
                 </label>
                 <input
-                  id="blog_slog"
-                  placeholder="Enter Blog Slog..."
+                  id="blog_slug"
+                  placeholder="Enter Blog slug..."
                   className="border border-gray-300 text-sm rounded-lg block w-full p-2.5"
                   value={blogSlug}
                   onChange={(e) => {
