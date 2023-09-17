@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import PORT from "../../assets/constant/Url";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const News = () => {
   const [blogPost, setBlogPost] = useState([]);
   const [blogCategory, setBlogCategory] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getPosts();
@@ -40,6 +42,13 @@ const News = () => {
     return date.toLocaleDateString("en-US", options);
   }
 
+  const gotoNewsViewPage = (newsId) => {
+    navigate(`/viewnews/${newsId}`, {
+      state: { id: newsId },
+    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <>
       <div className="w-full bg-gray-100">
@@ -56,7 +65,13 @@ const News = () => {
                 blogPost.map((e, idx) => {
                   let flag = 0;
                   return (
-                    <div className="three-news" key={idx}>
+                    <div
+                      className="three-news"
+                      key={idx}
+                      onClick={() => {
+                        gotoNewsViewPage(e.id);
+                      }}
+                    >
                       <span className="news-category-name">
                         {blogCategory.map((x) => {
                           if (e.blog_category === x.id) {

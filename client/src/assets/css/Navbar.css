@@ -137,7 +137,7 @@
   }
 }
 
-input::placeholder {
+.search-input::placeholder {
   font-family: noto;
 }
 

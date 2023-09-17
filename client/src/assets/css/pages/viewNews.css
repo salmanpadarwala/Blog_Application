@@ -1,0 +1,114 @@
+@font-face {
+  font-family: "noto";
+  src: url("../../font/Noto_Nastaliq_Urdu/static/NotoNastaliqUrdu-Regular.ttf") format("truetype");
+}
+
+.view_news_main_section {
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  height: fit-content;
+  width: 75%;
+  padding: 12px;
+  margin: 0 auto;
+}
+
+.view_news_image {
+  overflow: hidden;
+  height: 100%;
+}
+
+.view_news_title {
+  font-family: noto;
+  font-weight: bold;
+  margin-top: 15px;
+  border-bottom: 1px solid var(--primary-color);
+  padding-bottom: 20px;
+  letter-spacing: 0.05rem;
+  line-height: 2rem;
+}
+
+.view_news_content {
+  font-family: noto;
+  letter-spacing: 0.05rem;
+  line-height: 2rem;
+  padding-bottom: 20px;
+  margin-top: 7px;
+}
+
+.view_news_date {
+  font-family: noto;
+  letter-spacing: 0.05rem;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 3px 0px 0px 5px;
+  color: rgb(127, 182, 255);
+}
+
+/* SIDEBAR VIEW NEWS CSS */
+.sidbar-veiw-content {
+  height: 48px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  font-family: noto;
+  letter-spacing: 0.03rem;
+  font-size: 14px;
+}
+
+.view_news_main_section-sidebar {
+  width: 95%;
+  margin-left: 20px ;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+  rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  padding: 12px;
+}
+
+.main-news-view-page {
+  width: 80%;
+  display: flex;
+  margin-top: 50px !important;
+  margin: 0 auto;
+}
+
+.sidebar-news-page {
+  width: 30%;
+}
+
+@media screen and (max-width: 1000px) {
+  .main-news-view-page {
+    /* display: block; */
+    width: 100%;
+  }
+
+  .sidebar-news-page {
+    width: 40%;
+    margin-left: 10px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .main-news-view-page {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .sidebar-news-page {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .view_news_main_section {
+    width: 95%;
+    margin: auto;
+    margin-top: 10px;
+  }
+
+  .view_news_image {
+    height: 70%;
+  }
+  .view_news_main_section-sidebar{
+    margin: 0 auto;
+    /* margin-left: 0px !important; */
+  }
+}
