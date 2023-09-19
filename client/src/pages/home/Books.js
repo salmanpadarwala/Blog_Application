@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import PORT from "../../assets/constant/Url";
 
@@ -34,6 +34,15 @@ const Books = () => {
     }
   };
 
+  //PASS DATA BOOK VIEW PAGE
+  const navigate = useNavigate();
+  const gotoBookViewpage = (bookId) => {
+    navigate(`/viewBookPage/${bookId}`, {
+      state: { id: bookId },
+    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <>
       <div className="w-full bg-gray-100">
@@ -58,9 +67,8 @@ const Books = () => {
                         key={idx}
                       >
                         <NavLink
-                          className={`text-xs font-bold uppercase px-3 py-3 rounded block ${
-                            selectedTab === e.id ? "active-tabs" : ""
-                          }`}
+                          className={`text-xs font-bold uppercase px-3 py-3 rounded block ${selectedTab === e.id ? "active-tabs" : ""
+                            }`}
                           onClick={() => {
                             filtercateData(e.id);
                           }}
@@ -85,6 +93,7 @@ const Books = () => {
                             className="islamic-books shadow-lg"
                             id={`#${books.books_category}`}
                             key={idx}
+                            onClick={() => { gotoBookViewpage(books.id) }}
                           >
                             <div className="islamic-books-main">
                               <img

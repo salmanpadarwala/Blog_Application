@@ -67,6 +67,20 @@ const getbooks = async (req, res) => {
     }
   });
 };
+//GET BOOKS DETAIL WITH ID 
+const getbookviewdetail = async (req, res) => {
+  const q =
+    "select *, DATE_FORMAT(DATE(book_publish_date), '%Y-%m-%d') AS upload_date FROM `bg_books_detail` WHERE id= ?";
+  const values = [req.params.id];
+  conn.query(q, values, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(data);
+    }
+  });
+};
+
 
 // get Books with filter
 const getCateFilter = (req, res) => {
@@ -137,6 +151,7 @@ const getbookdetail = async (req, res) => {
     }
   });
 };
+
 
 // ************ Get Trash Books **********************
 
@@ -224,4 +239,5 @@ module.exports = {
   getbookdetail,
   gettrashbooks,
   EditBooks,
+  getbookviewdetail,
 };

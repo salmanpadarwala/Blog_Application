@@ -11,7 +11,7 @@ const ViewNews = () => {
 
   useEffect(() => {
     getNewsViewData();
-  }, []);
+  }, [newsId]);
   const getNewsViewData = async () => {
     try {
       const res = await axios.get(`${PORT}getblogpostdetail/${newsId}`);

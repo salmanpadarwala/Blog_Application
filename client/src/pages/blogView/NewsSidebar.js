@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PORT from '../../assets/constant/Url';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const NewsSidebar = () => {
     const [blogPost, setBlogPost] = useState([]);
@@ -15,7 +16,14 @@ const NewsSidebar = () => {
             console.log(err);
         }
     };
-    console.log(blogPost)
+
+    const navigate = useNavigate();
+    const gotoNewsViewPage = (newsId) => {
+        navigate(`/viewnews/${newsId}`, {
+            state: { id: newsId },
+        });
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    };
     return (
         <>
             <div className='view_news_main_section-sidebar'>
@@ -38,7 +46,7 @@ const NewsSidebar = () => {
                     <p>حالیہ پوسٹ :-</p>
                 </div>
                 {blogPost.map((post, index) => (
-                    <div className='flex' key={index}>
+                    <div className='flex' key={index} onClick={() => { gotoNewsViewPage(post.id) }}>
                         <div className='w-8/12'>
                             <p className='sidbar-veiw-content'>{post.blog_title}</p>
                         </div>

@@ -34,6 +34,8 @@ const LoginForm = () => {
         console.log("Error fetching Category data in Brand.js:", error);
       });
   };
+  console.log(uname)
+  console.log(password)
   return (
     <>
       <div className="card">
