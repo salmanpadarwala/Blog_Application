@@ -24,7 +24,9 @@ const App = () => {
       <NameCateRoute />
       <NameRoute />
       <ViewNewsRoute />
+
       <ViewBookRoute />
+
     </>
   );
 };
