@@ -9,6 +9,7 @@ import BookRoute from "./routes/admin/BookRoute";
 import NameCateRoute from "./routes/admin/NameCateRoute";
 import NameRoute from "./routes/admin/NameRoute";
 import ViewNewsRoute from "./routes/ViewNewsRoute";
+import ViewBookRoute from "./routes/ViewBookRoute";
 
 const App = () => {
   return (
@@ -23,6 +24,9 @@ const App = () => {
       <NameCateRoute />
       <NameRoute />
       <ViewNewsRoute />
+
+      <ViewBookRoute />
+
     </>
   );
 };
