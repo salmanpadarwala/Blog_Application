@@ -5,12 +5,8 @@
 
 .header-topbar-main {
   display: flex;
-  color: #fff;
   margin: auto;
-  background-color: var(--primary-color);
-  background-image: url("../image/top_bar_back.png");
-  background-repeat: repeat-x;
-  background-position: left, right;
+  background-color: #f3f4f6;
   justify-content: space-around;
   font-family: noto;
 }
@@ -31,18 +27,13 @@
   transition: color 0.3s ease;
 }
 .topbar-icon-link i {
-  background-color: var(--secondary-color);
-  width: 28px;
-  height: 28px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  font-size: 14px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  font-size: 16px;
 }
 .navbar-menu {
   font-family: noto;
+  width: 100%;
+  justify-content: space-around;
 }
 .navbar-menu li a:hover {
   color: var(--primary-color);

@@ -1,10 +1,10 @@
 @font-face {
   font-family: "noto";
-  src: url("../../font/Noto_Nastaliq_Urdu/static/NotoNastaliqUrdu-Regular.ttf") format("truetype");
+  src: url("../../font/Noto_Nastaliq_Urdu/static/NotoNastaliqUrdu-Regular.ttf")
+    format("truetype");
   src: url("../../font/Noto_Nastaliq_Urdu/static/NotoNastaliqUrdu-Regular.ttf")
     format("truetype");
 }
-
 .view_news_main_section {
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
@@ -13,16 +13,9 @@
   padding: 12px;
   margin: 0 auto;
 }
-
 .view_news_image {
   overflow: hidden;
   height: 100%;
-}
-
-}
-.view_news_image {
-  overflow: hidden;
-  height: 400px;
 }
 .view_news_title {
   font-family: noto;
@@ -51,7 +44,6 @@
   color: rgb(127, 182, 255);
 }
 
-
 /* SIDEBAR VIEW NEWS CSS */
 .sidbar-veiw-content {
   height: 48px;
@@ -62,9 +54,8 @@
   font-size: 14px;
 }
 
-.view_news_main_section-sidebar {
+.view_news_main_section_sidebar {
   width: 95%;
-  margin-left: 20px;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   padding: 12px;
@@ -83,10 +74,11 @@
 
 @media screen and (max-width: 1000px) {
   .main-news-view-page {
-    /* display: block; */
     width: 100%;
   }
-
+  .view_news_main_section {
+    margin: 0 10px;
+  }
   .sidebar-news-page {
     width: 40%;
     margin-left: 10px;
@@ -98,12 +90,13 @@
   .main-news-view-page {
     display: block;
     width: 100%;
+    margin-top: 5px !important;
     margin: 0 auto;
   }
 
   .sidebar-news-page {
     width: 100%;
-    margin: 0 auto;
+    margin-top: 20px;
   }
 
   .view_news_main_section {
@@ -116,13 +109,10 @@
     height: 70%;
   }
 
-  .view_news_main_section-sidebar {
+  .view_news_main_section_sidebar {
     margin: 0 auto;
-    /* margin-left: 0px !important; */
   }
 }
-
-
 
 /* VIEW BOOK PAGE CSS START */
 .view-book-side-section {

@@ -22,23 +22,6 @@ const Navbar = () => {
             </NavLink>
           </div>
         </div>
-        <div className="header-topbar-sections">
-          <span> فالو کریں: </span>
-          <span className="topbar-icons">
-            <NavLink to="/" className="topbar-icon-link">
-              <i className="fa-brands fa-facebook-f"></i>
-            </NavLink>
-            <NavLink to="/" className="topbar-icon-link">
-              <i className="fa-brands fa-x-twitter"></i>
-            </NavLink>
-            <NavLink to="/" className="topbar-icon-link">
-              <i className="fa-brands fa-linkedin-in"></i>
-            </NavLink>
-            <NavLink to="/" className="topbar-icon-link">
-              <i className="fa-brands fa-instagram"></i>
-            </NavLink>
-          </span>
-        </div>
       </div>
 
       <header className="sticky top-0 z-10">
@@ -46,44 +29,64 @@ const Navbar = () => {
           <div className="lg:flex block items-center lg:py-4 py-2 justify-between">
             <div>
               <NavLink to="/">
-                <img src={Logo} alt="logo" width="144px" height="auto" />
+                <img src={Logo} alt="logo" width="80px" height="auto" />
               </NavLink>
             </div>
             <ul
-              className={`lg:space-y-0 space-y-2 lg:mt-0 mt-5 font-semibold navbar-menu lg:flex ${
+              className={`lg:space-y-0 space-y-2 lg:mt-0 mt-5 font-semibold navbar-menu lg:flex mx-auto ${
                 openMenu ? "" : "hidden"
               }`}
             >
-              <li>
-                <NavLink to="/" className="nav-link">
-                  مرکزی صفحہ
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/about" className="nav-link">
-                  بارے میں
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/contact" className="nav-link">
-                  رابطہ کریں
-                </NavLink>
-              </li>
+              <div className="lg:flex gap-y-30">
+                <li className="mb-3 lg:mb-0">
+                  <NavLink to="/" className="nav-link">
+                    مرکزی صفحہ
+                  </NavLink>
+                </li>
+                <li className="mb-3 lg:mb-0">
+                  <NavLink to="/about" className="nav-link">
+                    بارے میں
+                  </NavLink>
+                </li>
+                <li className="mb-3 lg:mb-0">
+                  <NavLink to="/contact" className="nav-link">
+                    رابطہ کریں
+                  </NavLink>
+                </li>
+              </div>
+              <div className="text-sm">
+                <div className="relative text-gray-600">
+                  <input
+                    type="search"
+                    name="serch"
+                    placeholder="Search"
+                    className="bg-gray-100 h-10 px-5 pr-10 rounded-full text-sm focus:outline-none"
+                  />
+                  <button
+                    type="submit"
+                    className="absolute right-0 top-0 mt-2.5 mr-4"
+                  >
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                  </button>
+                </div>
+              </div>
             </ul>
-            <div>
-              <div className="pt-2 relative mx-auto text-gray-600">
+            {/* <div>
+              <div className="relative text-gray-600">
                 <input
-                  className="search-input focus:outline-none"
                   type="search"
-                  name="search"
-                  placeholder="یہاں تلاش کریں..."
+                  name="serch"
+                  placeholder="Search"
+                  className="bg-gray-100 h-10 px-5 pr-10 rounded-full text-sm focus:outline-none"
                 />
                 <button
-                  type="button"
-                  className="absolute right-0 top-0 mt-5 mr-4"
-                ></button>
+                  type="submit"
+                  className="absolute right-0 top-0 mt-2.5 mr-4"
+                >
+                  <i className="fa-solid fa-magnifying-glass"></i>
+                </button>
               </div>
-            </div>
+            </div> */}
             <div className="toggle-btn">
               <button
                 onClick={() => {

@@ -13,7 +13,6 @@ const ViewNews = () => {
 
   useEffect(() => {
     getNewsViewData();
-
   }, [newsId]);
 
   const getNewsViewData = async () => {
@@ -40,19 +39,10 @@ const ViewNews = () => {
 
   return (
     <>
-
       <div className="main-news-view-page">
-        <div className="sidebar-news-page"><NewsSidebar /></div>
         <div className="view_news_main_section">
-          <div className="">
+          <div>
             <div className="view_news_image">
-
-      <div className="w-4/5 mt-10 mx-auto flex">
-        <div className="w-3/12">Sidebar component</div>
-        <div className="w-3/4 mx-auto p-5 view_news_main_section">
-          <div className="">
-            <div className="w-full view_news_image">
-
               <img
                 src={`../upload/${viewNews.blog_image}`}
                 alt="news"
@@ -68,10 +58,18 @@ const ViewNews = () => {
               ></p>
             </div>
             <div className="flex justify-between">
-              <p className="view_news_date"><span>مصنف :</span> {viewNews.blog_author}</p>
-              <p className="view_news_date"><span>اشاعت کی تاریخ :</span>{formatDate(viewNews.blog_publish_date)}</p>
+              <p className="view_news_date">
+                <span>مصنف :</span> {viewNews.blog_author}
+              </p>
+              <p className="view_news_date">
+                <span>اشاعت کی تاریخ :</span>
+                {formatDate(viewNews.blog_publish_date)}
+              </p>
             </div>
           </div>
+        </div>
+        <div className="sidebar-news-page ms-5">
+          <NewsSidebar />
         </div>
       </div>
     </>

@@ -12,7 +12,7 @@ const Books = () => {
 
   useEffect(() => {
     getData();
-  }, [booklogCategory]);
+  }, []);
 
   // get book category data
   const getData = async () => {
@@ -67,8 +67,9 @@ const Books = () => {
                         key={idx}
                       >
                         <NavLink
-                          className={`text-xs font-bold uppercase px-3 py-3 rounded block ${selectedTab === e.id ? "active-tabs" : ""
-                            }`}
+                          className={`text-xs font-bold uppercase px-3 py-3 rounded block ${
+                            selectedTab === e.id ? "active-tabs" : ""
+                          }`}
                           onClick={() => {
                             filtercateData(e.id);
                           }}
@@ -93,7 +94,9 @@ const Books = () => {
                             className="islamic-books shadow-lg"
                             id={`#${books.books_category}`}
                             key={idx}
-                            onClick={() => { gotoBookViewpage(books.id) }}
+                            onClick={() => {
+                              gotoBookViewpage(books.id);
+                            }}
                           >
                             <div className="islamic-books-main">
                               <img
