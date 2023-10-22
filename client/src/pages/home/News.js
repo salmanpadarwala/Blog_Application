@@ -60,7 +60,7 @@ const News = () => {
           </div>
 
           <div className="w-full">
-            <div className="flex flex-wrap bg-white shadow-lg rounded justify-around mt-5 px-3 pt-6">
+            <div className=" main_news flex flex-wrap bg-white shadow-lg rounded justify-around mt-5">
               {blogPost.length > 0 ? (
                 blogPost.map((e, idx) => {
                   let flag = 0;

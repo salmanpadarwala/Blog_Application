@@ -7,23 +7,23 @@ const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
   return (
     <>
-      <div className="header-topbar-main">
+      <div className="header-topbar-main" dir="ltr">
         <div className="header-topbar-sections">
           <div>
             <NavLink to="tel:7383294925">
               <i className="fa-solid fa-phone me-2"></i>
-              <span>فون: 99742 41074</span>
+              <span>Phone: 99742 41074</span>
             </NavLink>
           </div>
           <div>
             <NavLink to="mailto:ahmadpadarwala4@gmail.com">
               <i className="fa-solid fa-envelope me-2"></i>
-              <span>ای میل: ahmadpadarwala4@gmail.com</span>
+              <span>Email: ahmadpadarwala4@gmail.com</span>
             </NavLink>
           </div>
         </div>
         <div className="header-topbar-sections">
-          <span> فالو کریں: </span>
+          <span> Follow </span>
           <span className="topbar-icons">
             <NavLink to="/" className="topbar-icon-link">
               <i className="fa-brands fa-facebook-f"></i>
@@ -41,7 +41,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      <header className="sticky top-0 z-10">
+      <header className="sticky top-0 z-10" dir="ltr">
         <nav className="w-full bg-white shadow-md lg:px-10 px-4">
           <div className="lg:flex block items-center lg:py-4 py-2 justify-between">
             <div>
@@ -50,39 +50,39 @@ const Navbar = () => {
               </NavLink>
             </div>
             <ul
-              className={`lg:space-y-0 space-y-2 lg:mt-0 mt-5 font-semibold navbar-menu lg:flex ${
-                openMenu ? "" : "hidden"
-              }`}
+              className={`lg:space-y-0 space-y-2 lg:mt-0 mt-5 font-semibold navbar-menu lg:flex ${openMenu ? "" : "hidden"
+                }`}
             >
               <li>
                 <NavLink to="/" className="nav-link">
-                  مرکزی صفحہ
+                  Home
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/about" className="nav-link">
-                  بارے میں
+                About
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/contact" className="nav-link">
-                  رابطہ کریں
+                  Contact
                 </NavLink>
               </li>
             </ul>
             <div>
               <div className="pt-2 relative mx-auto text-gray-600">
                 <input
-                  className="search-input focus:outline-none"
+                  className="search-input focus:outline-none mx-auto"
                   type="search"
                   name="search"
-                  placeholder="یہاں تلاش کریں..."
+                  placeholder="search here..."
                 />
                 <button
                   type="button"
                   className="absolute right-0 top-0 mt-5 mr-4"
                 ></button>
               </div>
+
             </div>
             <div className="toggle-btn">
               <button
