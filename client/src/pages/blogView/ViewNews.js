@@ -50,9 +50,9 @@ const ViewNews = () => {
 
   return (
     <>
-
       <div className="main-news-view-page">
         <div className="view_news_main_section">
+
 
           <div className="view_news_image">
             <img
@@ -68,6 +68,31 @@ const ViewNews = () => {
                 <span className="special-text">
                   {stripHtmlTags(viewNews.blog_content) || "Data not available"}
                 </span>
+
+          <div>
+            <div className="view_news_image">
+              <img
+                src={`../upload/${viewNews.blog_image}`}
+                alt="news"
+                className="w-full"
+              />
+            </div>
+            <div className="view_news_title">{viewNews.blog_title}</div>
+            <div className="view_news_content">
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: viewNews.blog_content || "Data not available",
+                }}
+              ></p>
+            </div>
+            <div className="flex justify-between">
+              <p className="view_news_date">
+                <span>مصنف :</span> {viewNews.blog_author}
+              </p>
+              <p className="view_news_date">
+                <span>اشاعت کی تاریخ :</span>
+                {formatDate(viewNews.blog_publish_date)}
+
               </p>
             </div>
           </div>
@@ -82,6 +107,9 @@ const ViewNews = () => {
             </p>
           </div>
 
+        </div>
+        <div className="sidebar-news-page ms-5">
+          <NewsSidebar />
         </div>
         <div className="sidebar-news-page ms-5">
           <NewsSidebar />

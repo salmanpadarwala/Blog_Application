@@ -19,7 +19,7 @@ const Footer = () => {
             </svg>
           </div>
           <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-            <div className="relative max-w-2xl sm:mx-auto sm:max-w-xl md:max-w-2xl sm:text-center">
+            <div className="relative max-w-2xl sm:mx-auto sm:max-w-xl md:max-w-2xl">
               <h2 className="footer-title sm:text-4xl sm:leading-none">
                 ہماری نیوز لیٹر کو سبسکرائب کریں
               </h2>
@@ -30,7 +30,10 @@ const Footer = () => {
                 گیا ہے… کی صنعت کی معیاری ڈمی ایک نامعلوم پرنٹر قسم کی ایک گیلی
                 لیا اور جب کے بعد سے کبھی متن کیا گیا ہے…
               </p>
-              <form className="flex flex-col items-center w-full mb-4 md:flex-row md:px-16">
+              <form
+                className="flex flex-col items-center w-full mb-4 md:flex-row md:px-16"
+                dir="ltr"
+              >
                 <input
                   placeholder="Enter Email Address"
                   type="email"
@@ -44,16 +47,21 @@ const Footer = () => {
                 </button>
               </form>
             </div>
-            <p className="text-center font-bold text-md">
-              2023
-              <NavLink
-                to="https://valudas.com/"
-                target="_blank"
-                className="me-1 hover:text-white"
-              >
-                Valuda's Tech Park
-              </NavLink>
-              ©
+            <p className="text-center">
+              <span className="topbar-icons pt-2">
+                <NavLink to="/" className="topbar-icon-link">
+                  <i className="fa-brands fa-facebook-f"></i>
+                </NavLink>
+                <NavLink to="/" className="topbar-icon-link">
+                  <i className="fa-brands fa-x-twitter"></i>
+                </NavLink>
+                <NavLink to="/" className="topbar-icon-link">
+                  <i className="fa-brands fa-linkedin-in"></i>
+                </NavLink>
+                <NavLink to="/" className="topbar-icon-link">
+                  <i className="fa-brands fa-instagram"></i>
+                </NavLink>
+              </span>
             </p>
           </div>
         </div>
